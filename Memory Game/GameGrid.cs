@@ -70,17 +70,6 @@ namespace Memory_Game
             }
         }
 
-        //On click event when user clicks on a card
-        private void CardClick(object sender, MouseButtonEventArgs e)
-        {
-            Image card = (Image)sender;
-            ImageSource front = (ImageSource)card.Tag;
-            card.Source = front;
-        }
-
-        
-
-
         //Adding all game images to a list
         private List<ImageSource> GetImagesList()
         {
@@ -92,12 +81,26 @@ namespace Memory_Game
                 images.Add(source);
             }
             //IMAGE RANDOMZER COMES HERE
-            
 
-            
+
+
             //------------------------------//
             return images;
         }
+
+        //On click event when user clicks on a card
+        private void CardClick(object sender, MouseButtonEventArgs e)
+        {
+            Image card = (Image)sender;
+            ImageSource front = (ImageSource)card.Tag;
+            card.Source = front;
+            
+        }
+
+        
+
+
+        
         
 
 
