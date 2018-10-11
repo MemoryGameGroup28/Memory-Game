@@ -31,6 +31,7 @@ namespace Memory_Game
             this.ImageRows = ImageRows;
             InitializeMemoryGrid(GridCol, GridRow);
             AddImages();
+            GetImagesList();
 
         }
 
@@ -51,14 +52,16 @@ namespace Memory_Game
         //Add background images to the generated grid
         private void AddImages()
         {
-            for(int GridRow = 0; GridRow < ImageRows; GridRow++)
+            List<ImageSource> images = GetImagesList();
+            for (int GridRow = 0; GridRow < ImageRows; GridRow++)
             {
                 for (int GridCol = 0; GridCol < ImageCols; GridCol++)
                 {
                     Image backgroundImage = new Image();
                     backgroundImage.Source = new BitmapImage(new Uri("Files/cardBackground.png", UriKind.Relative)); //Set background image
+                    backgroundImage.Tag = images.First();
+                    images.RemoveAt(0);
                     backgroundImage.MouseDown += new MouseButtonEventHandler(CardClick);
-
                     Grid.SetColumn(backgroundImage, GridCol);
                     Grid.SetRow(backgroundImage, GridRow);
                     grid.Children.Add(backgroundImage);
@@ -67,14 +70,39 @@ namespace Memory_Game
             }
         }
 
+        //Adding all game images to a list
+        private List<ImageSource> GetImagesList()
+        {
+            List<ImageSource> images = new List<ImageSource>();
+            for (int i = 0; i < 16; i++)
+            {
+                int imageNr = i % 8 + 1;
+                ImageSource source = new BitmapImage(new Uri("Files/Card" + imageNr + ".png", UriKind.Relative));
+                images.Add(source);
+            }
+            //IMAGE RANDOMZER COMES HERE
+
+
+
+            //------------------------------//
+            return images;
+        }
+
         //On click event when user clicks on a card
         private void CardClick(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("Test");
+            Image card = (Image)sender;
+            ImageSource front = (ImageSource)card.Tag;
+            card.Source = front;
+            
         }
 
+        
 
-        //Image Randomizer:
+
+        
+        
+
 
 
 

@@ -26,8 +26,11 @@ namespace Memory_Game
 
 
 
-        //HOW TO USE A CLASS WITHIN THE MAIN WINDOW: GameGrid gameGrid = new GameGrid(col, row); 
-
+        //HOW TO USE A CLASS WITHIN THE MAIN WINDOW: 
+            //Class name - function name -> Define function with class parameters
+            //GameGrid gameGrid = new GameGrid(col, row); 
+        
+        //-----------------------------------------//
 
         //Main Game Screen that initializes all game components
         public MainWindow()
