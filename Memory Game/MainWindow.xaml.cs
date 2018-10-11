@@ -36,20 +36,26 @@ namespace Memory_Game
         public MainWindow()
         {
             InitializeComponent();
+            InitializeGameGrid();
+
             GameGrid grid = new GameGrid(GameGrid, GridCol, GridRow);
+
         }
 
-        
-        //Give a certain width/height to each column/row item within the game
+
+        //Give a certain width/height to each column/row item within the game grid defined in the MainWindow.xaml
         private void InitializeGameGrid()
         {
             ColumnDefinition gameColumn = new ColumnDefinition();
-            gameColumn.Width = new GridLength(7, GridUnitType.Star);
             GameGrid.ColumnDefinitions.Add(gameColumn);
+            //gameColumn.Width = new GridLength(7, GridUnitType.Star);
+
+
 
             ColumnDefinition scoreColumn = new ColumnDefinition();
-            scoreColumn.Width = new GridLength(3, GridUnitType.Star);
             GameGrid.ColumnDefinitions.Add(scoreColumn);
+            //scoreColumn.Width = new GridLength(3, GridUnitType.Star);
+
         }
 
     }

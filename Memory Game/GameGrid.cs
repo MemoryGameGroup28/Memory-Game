@@ -22,16 +22,26 @@ namespace Memory_Game
         private Grid grid;
         private int ImageRows = 4;
         private int ImageCols = 4;
+        private int currentScorePlayer1 = 0;
+        private int currentScorePlayer2 = 0;
+
+
+        private bool card1Flip = false;
+        private bool card2Flip = false;
+        private BitmapImage card1Image = null;
+        private BitmapImage card2Image = null;
 
 
         public GameGrid(Grid grid, int GridCol, int GridRow)
         {
             this.grid = grid;
-            this.ImageCols = ImageCols;
-            this.ImageRows = ImageRows;
+            //this.ImageCols = ImageCols;
+            //this.ImageRows = ImageRows;
             InitializeMemoryGrid(GridCol, GridRow);
-            AddImages();
+            AddBackgroundImages();
             GetImagesList();
+            TitleLabel();
+            ScoreLabel();
 
         }
 
@@ -49,8 +59,8 @@ namespace Memory_Game
             }
         }
 
-        //Add background images to the generated grid
-        private void AddImages()
+        //Add backgroundimages to the generated grid
+        private void AddBackgroundImages()
         {
             List<ImageSource> images = GetImagesList();
             for (int GridRow = 0; GridRow < ImageRows; GridRow++)
@@ -70,6 +80,8 @@ namespace Memory_Game
             }
         }
 
+
+        
         //Adding all game images to a list
         private List<ImageSource> GetImagesList()
         {
@@ -79,6 +91,7 @@ namespace Memory_Game
                 int imageNr = i % 8 + 1;
                 ImageSource source = new BitmapImage(new Uri("Files/Card" + imageNr + ".png", UriKind.Relative));
                 images.Add(source);
+
             }
             //IMAGE RANDOMZER COMES HERE
 
@@ -91,36 +104,70 @@ namespace Memory_Game
         //On click event when user clicks on a card
         private void CardClick(object sender, MouseButtonEventArgs e)
         {
-            Image card = (Image)sender;
-            ImageSource front = (ImageSource)card.Tag;
-            card.Source = front;
-            
+            if (card1Flip == false)
+            {
+                Image card = (Image)sender;
+                ImageSource front = (ImageSource)card.Tag;
+                card.Source = front;
+                card1Flip = true;
+                this.card1Image = front;
+            }
+            else if (card1Flip == true && card2Flip == false)
+            {
+                Image card = (Image)sender;
+                ImageSource front = (ImageSource)card.Tag;
+                card.Source = front;
+                card2Flip = true;
+            }
+            if (card1Flip && card2Flip == true)
+            {
+                MessageBox.Show("2 flipped cards");
+            }
+
         }
-
         
 
 
-        
-        
-
-
-
-
-
-
-        private void AddLabel()
+        #region Labels
+        //Add title Label
+        private void TitleLabel()
         {
             Label title = new Label();
             title.Content = "Memory";
-            title.FontFamily = new FontFamily("Ariel");
-            title.FontSize = 40;
+            title.FontSize = 30;
             title.HorizontalAlignment = HorizontalAlignment.Center;
-
-            Grid.SetColumn(title, 1);
+            Grid.SetColumn(title, 4);
+            Grid.SetRow(title, 0);
             grid.Children.Add(title);
         }
 
+        //Add labels related to the current score
+        private void ScoreLabel()
+        {
+            Label currentScore = new Label();
+            currentScore.Content = "Current Score";
+            currentScore.FontSize = 20;
+            Grid.SetColumn(currentScore, 4);
+            Grid.SetRow(currentScore, 1);
+            grid.Children.Add(currentScore);
 
+            Label scorePlayer1 = new Label();
+            scorePlayer1.Content = "Player 1: " + currentScorePlayer1;
+            scorePlayer1.FontSize = 20;
+            Grid.SetColumn(scorePlayer1, 4);
+            Grid.SetRow(scorePlayer1, 2);
+            grid.Children.Add(scorePlayer1);
+
+
+            Label scorePlayer2 = new Label();
+            scorePlayer2.Content = "Player2: " + currentScorePlayer2;
+            scorePlayer2.FontSize = 20;
+            Grid.SetColumn(scorePlayer2, 4);
+            Grid.SetRow(scorePlayer2, 3);
+            grid.Children.Add(scorePlayer2);
+
+        }
+        #endregion Labels
 
     }
 }
