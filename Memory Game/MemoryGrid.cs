@@ -23,10 +23,11 @@ namespace Memory_Game
         private Grid mainGrid;
         private int ImageRows = 4;
         private int ImageCols = 4;
+
+        private int CurrentPlayer = 0;
         private int currentScorePlayer1 = 0;
         private int currentScorePlayer2 = 0;
-
-
+        
         private bool card1Flip = false;
         private bool card2Flip = false;
         private Uri card1Image = null;
@@ -43,10 +44,8 @@ namespace Memory_Game
             GetImagesList();
             TitleLabel();
             ScoreLabel();
-            
+            CurrentPlayer = 1;
         }
-
-        
 
         //Generate MemoryGrid with parameters assigned to ImageRows/Cols + GridRow/Col
         private void InitializeMemoryGrid(int GridCol, int GridRow)
@@ -110,7 +109,7 @@ namespace Memory_Game
         //On click event when user clicks on a card
         private void CardClick(object sender, MouseButtonEventArgs e)
         {
-            //On click assing image from List<source> and store data from card 1 in card1Image
+            //On click access image URI from List<URI>, convert URI to Bitmap Image and store data from card 1 in card1Image
             if (card1Flip == false)
             {
 
@@ -121,7 +120,7 @@ namespace Memory_Game
                 card1Flip = true;
                 this.card1Image = (Uri)card.Tag;
             }
-            //On click assing image from List<source> and store data from card 2 in card2Image
+            //On click access image URI from List<URI>, convert URI to Bitmap Image and store data from card 2 in card2Image
             else if (card1Flip == true && card2Flip == false)
             {
                 Image card = (Image)sender;
@@ -136,17 +135,28 @@ namespace Memory_Game
             {
                 if(card1Image.Equals(card2Image))
                 {
-                    MessageBox.Show("These 2 cards are equal");
+                    card1Flip = false;
+                    card2Flip = false;
+                    if (CurrentPlayer == 1)
+                    {
+                        currentScorePlayer1++;
+                    }
+                    else if (CurrentPlayer ==2)
+                    {
+                        currentScorePlayer2++;
+                    }
                 }
 
                 else if (card1Image != card2Image)
                 {
-                    MessageBox.Show("These cards are different");
+                    card1Flip = false;
+                    card2Flip = false;
+                    CurrentPlayer = 2;
                 }
             }
 
         }
-        
+
 
 
         #region Labels
