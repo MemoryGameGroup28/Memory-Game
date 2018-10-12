@@ -16,10 +16,11 @@ using System.Windows.Shapes;
 
 namespace Memory_Game
 {
-    public class GameGrid
+    public class MemoryGrid
     {
         // Create the Grid
         private Grid grid;
+        private Grid mainGrid;
         private int ImageRows = 4;
         private int ImageCols = 4;
         private int currentScorePlayer1 = 0;
@@ -28,11 +29,11 @@ namespace Memory_Game
 
         private bool card1Flip = false;
         private bool card2Flip = false;
-        private BitmapImage card1Image = null;
-        private BitmapImage card2Image = null;
+        private Uri card1Image = null;
+        private Uri card2Image = null;
 
 
-        public GameGrid(Grid grid, int GridCol, int GridRow)
+        public MemoryGrid(Grid grid, int GridCol, int GridRow)
         {
             this.grid = grid;
             //this.ImageCols = ImageCols;
@@ -42,27 +43,31 @@ namespace Memory_Game
             GetImagesList();
             TitleLabel();
             ScoreLabel();
-
+            
         }
+
+        
 
         //Generate MemoryGrid with parameters assigned to ImageRows/Cols + GridRow/Col
         private void InitializeMemoryGrid(int GridCol, int GridRow)
         {
+            mainGrid = new Grid();
             for (int i = 0; i < GridCol; i++)
             {
-                grid.ColumnDefinitions.Add(new ColumnDefinition());
+                mainGrid.ColumnDefinitions.Add(new ColumnDefinition());
 
             }
             for (int i = 0; i < GridRow; i++)
             {
-                grid.RowDefinitions.Add(new RowDefinition());
+                mainGrid.RowDefinitions.Add(new RowDefinition());
             }
+            grid.Children.Add(mainGrid);
         }
 
         //Add backgroundimages to the generated grid
         private void AddBackgroundImages()
         {
-            List<ImageSource> images = GetImagesList();
+            List<Uri> images = GetImagesList();
             for (int GridRow = 0; GridRow < ImageRows; GridRow++)
             {
                 for (int GridCol = 0; GridCol < ImageCols; GridCol++)
@@ -70,11 +75,12 @@ namespace Memory_Game
                     Image backgroundImage = new Image();
                     backgroundImage.Source = new BitmapImage(new Uri("Files/cardBackground.png", UriKind.Relative)); //Set background image
                     backgroundImage.Tag = images.First();
+                    
                     images.RemoveAt(0);
                     backgroundImage.MouseDown += new MouseButtonEventHandler(CardClick);
                     Grid.SetColumn(backgroundImage, GridCol);
                     Grid.SetRow(backgroundImage, GridRow);
-                    grid.Children.Add(backgroundImage);
+                    mainGrid.Children.Add(backgroundImage);
 
                 }
             }
@@ -83,13 +89,13 @@ namespace Memory_Game
 
         
         //Adding all game images to a list
-        private List<ImageSource> GetImagesList()
+        private List<Uri> GetImagesList()
         {
-            List<ImageSource> images = new List<ImageSource>();
+            List<Uri> images = new List<Uri>();
             for (int i = 0; i < 16; i++)
             {
                 int imageNr = i % 8 + 1;
-                ImageSource source = new BitmapImage(new Uri("Files/Card" + imageNr + ".png", UriKind.Relative));
+                Uri source = new Uri("Files/Card" + imageNr + ".png", UriKind.Relative);
                 images.Add(source);
 
             }
@@ -104,24 +110,39 @@ namespace Memory_Game
         //On click event when user clicks on a card
         private void CardClick(object sender, MouseButtonEventArgs e)
         {
+            //On click assing image from List<source> and store data from card 1 in card1Image
             if (card1Flip == false)
             {
+
                 Image card = (Image)sender;
-                ImageSource front = (ImageSource)card.Tag;
+                ImageSource front = new BitmapImage((Uri)card.Tag);
+
                 card.Source = front;
                 card1Flip = true;
-                this.card1Image = front;
+                this.card1Image = (Uri)card.Tag;
             }
+            //On click assing image from List<source> and store data from card 2 in card2Image
             else if (card1Flip == true && card2Flip == false)
             {
                 Image card = (Image)sender;
-                ImageSource front = (ImageSource)card.Tag;
+                ImageSource front = new BitmapImage((Uri)card.Tag);
+
                 card.Source = front;
                 card2Flip = true;
+                this.card2Image = (Uri)card.Tag;
             }
+            //Match function
             if (card1Flip && card2Flip == true)
             {
-                MessageBox.Show("2 flipped cards");
+                if(card1Image.Equals(card2Image))
+                {
+                    MessageBox.Show("These 2 cards are equal");
+                }
+
+                else if (card1Image != card2Image)
+                {
+                    MessageBox.Show("These cards are different");
+                }
             }
 
         }
@@ -136,7 +157,7 @@ namespace Memory_Game
             title.Content = "Memory";
             title.FontSize = 30;
             title.HorizontalAlignment = HorizontalAlignment.Center;
-            Grid.SetColumn(title, 4);
+            Grid.SetColumn(title, 1);
             Grid.SetRow(title, 0);
             grid.Children.Add(title);
         }
@@ -147,14 +168,14 @@ namespace Memory_Game
             Label currentScore = new Label();
             currentScore.Content = "Current Score";
             currentScore.FontSize = 20;
-            Grid.SetColumn(currentScore, 4);
+            Grid.SetColumn(currentScore, 1);
             Grid.SetRow(currentScore, 1);
             grid.Children.Add(currentScore);
 
             Label scorePlayer1 = new Label();
             scorePlayer1.Content = "Player 1: " + currentScorePlayer1;
             scorePlayer1.FontSize = 20;
-            Grid.SetColumn(scorePlayer1, 4);
+            Grid.SetColumn(scorePlayer1, 1);
             Grid.SetRow(scorePlayer1, 2);
             grid.Children.Add(scorePlayer1);
 
@@ -162,7 +183,7 @@ namespace Memory_Game
             Label scorePlayer2 = new Label();
             scorePlayer2.Content = "Player2: " + currentScorePlayer2;
             scorePlayer2.FontSize = 20;
-            Grid.SetColumn(scorePlayer2, 4);
+            Grid.SetColumn(scorePlayer2, 1);
             Grid.SetRow(scorePlayer2, 3);
             grid.Children.Add(scorePlayer2);
 

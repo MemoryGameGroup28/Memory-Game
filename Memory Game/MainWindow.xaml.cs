@@ -38,8 +38,9 @@ namespace Memory_Game
             InitializeComponent();
             InitializeGameGrid();
 
-            GameGrid grid = new GameGrid(GameGrid, GridCol, GridRow);
-
+            MemoryGrid grid = new MemoryGrid(GameGrid, GridCol, GridRow);
+            //GameGrid.Background = new SolidColorBrush(Color.FromRgb(0,0,0));
+            
         }
 
 
@@ -47,14 +48,12 @@ namespace Memory_Game
         private void InitializeGameGrid()
         {
             ColumnDefinition gameColumn = new ColumnDefinition();
+            gameColumn.Width = new GridLength(7, GridUnitType.Star);
             GameGrid.ColumnDefinitions.Add(gameColumn);
-            //gameColumn.Width = new GridLength(7, GridUnitType.Star);
-
-
-
+            
             ColumnDefinition scoreColumn = new ColumnDefinition();
+            scoreColumn.Width = new GridLength(3, GridUnitType.Star);
             GameGrid.ColumnDefinitions.Add(scoreColumn);
-            //scoreColumn.Width = new GridLength(3, GridUnitType.Star);
 
         }
 
