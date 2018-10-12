@@ -43,3 +43,18 @@ D:\School\Memory-Game-Project-Group28\Memory-Game\Memory Game\obj\Debug\Memory G
 D:\School\Memory-Game-Project-Group28\Memory-Game\Memory Game\obj\Debug\Memory Game.csproj.CoreCompileInputs.cache
 D:\School\Memory-Game-Project-Group28\Memory-Game\Memory Game\obj\Debug\Memory Game.exe
 D:\School\Memory-Game-Project-Group28\Memory-Game\Memory Game\obj\Debug\Memory Game.pdb
+D:\Github Desktop\Memory-Game-New\Memory-Game\Memory Game\bin\Debug\Memory Game.exe.config
+D:\Github Desktop\Memory-Game-New\Memory-Game\Memory Game\bin\Debug\Memory Game.exe
+D:\Github Desktop\Memory-Game-New\Memory-Game\Memory Game\bin\Debug\Memory Game.pdb
+D:\Github Desktop\Memory-Game-New\Memory-Game\Memory Game\obj\Debug\Memory Game.csprojAssemblyReference.cache
+D:\Github Desktop\Memory-Game-New\Memory-Game\Memory Game\obj\Debug\MainWindow.g.cs
+D:\Github Desktop\Memory-Game-New\Memory-Game\Memory Game\obj\Debug\App.g.cs
+D:\Github Desktop\Memory-Game-New\Memory-Game\Memory Game\obj\Debug\Memory Game_MarkupCompile.cache
+D:\Github Desktop\Memory-Game-New\Memory-Game\Memory Game\obj\Debug\Memory Game_MarkupCompile.lref
+D:\Github Desktop\Memory-Game-New\Memory-Game\Memory Game\obj\Debug\MainWindow.baml
+D:\Github Desktop\Memory-Game-New\Memory-Game\Memory Game\obj\Debug\Memory Game.g.resources
+D:\Github Desktop\Memory-Game-New\Memory-Game\Memory Game\obj\Debug\Memory_Game.Properties.Resources.resources
+D:\Github Desktop\Memory-Game-New\Memory-Game\Memory Game\obj\Debug\Memory Game.csproj.GenerateResource.cache
+D:\Github Desktop\Memory-Game-New\Memory-Game\Memory Game\obj\Debug\Memory Game.csproj.CoreCompileInputs.cache
+D:\Github Desktop\Memory-Game-New\Memory-Game\Memory Game\obj\Debug\Memory Game.exe
+D:\Github Desktop\Memory-Game-New\Memory-Game\Memory Game\obj\Debug\Memory Game.pdb
