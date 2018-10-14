@@ -20,37 +20,41 @@ namespace Memory_Game
     {
         // Create the Grid
         private Grid grid;
-        private Grid mainGrid;
+        private Grid mainGrid; //grid containing all memory cards
+        private Grid scoreGrid;
+        
+
         private int ImageRows = 4;
         private int ImageCols = 4;
 
         private int CurrentPlayer = 0;
         private int currentScorePlayer1 = 0;
         private int currentScorePlayer2 = 0;
-        
+
+
         private bool card1Flip = false;
         private bool card2Flip = false;
         private Uri card1Image = null;
         private Uri card2Image = null;
 
 
+
         public MemoryGrid(Grid grid, int GridCol, int GridRow)
         {
             this.grid = grid;
-            //this.ImageCols = ImageCols;
-            //this.ImageRows = ImageRows;
             InitializeMemoryGrid(GridCol, GridRow);
+            InitializeScoreGrid();
             AddBackgroundImages();
             GetImagesList();
-            TitleLabel();
-            ScoreLabel();
-            CurrentPlayer = 1;
+            Labels();
         }
 
         //Generate MemoryGrid with parameters assigned to ImageRows/Cols + GridRow/Col
         private void InitializeMemoryGrid(int GridCol, int GridRow)
         {
             mainGrid = new Grid();
+            mainGrid.ShowGridLines = true;
+            //mainGrid.ShowGridLines = true;
             for (int i = 0; i < GridCol; i++)
             {
                 mainGrid.ColumnDefinitions.Add(new ColumnDefinition());
@@ -60,6 +64,7 @@ namespace Memory_Game
             {
                 mainGrid.RowDefinitions.Add(new RowDefinition());
             }
+            Grid.SetColumn(mainGrid, 0);
             grid.Children.Add(mainGrid);
         }
 
@@ -85,8 +90,6 @@ namespace Memory_Game
             }
         }
 
-
-        
         //Adding all game images to a list
         private List<Uri> GetImagesList()
         {
@@ -109,13 +112,12 @@ namespace Memory_Game
         //On click event when user clicks on a card
         private void CardClick(object sender, MouseButtonEventArgs e)
         {
+            CurrentPlayer = 1;
             //On click access image URI from List<URI>, convert URI to Bitmap Image and store data from card 1 in card1Image
             if (card1Flip == false)
             {
-
                 Image card = (Image)sender;
                 ImageSource front = new BitmapImage((Uri)card.Tag);
-
                 card.Source = front;
                 card1Flip = true;
                 this.card1Image = (Uri)card.Tag;
@@ -135,16 +137,18 @@ namespace Memory_Game
             {
                 if(card1Image.Equals(card2Image))
                 {
-                    card1Flip = false;
-                    card2Flip = false;
                     if (CurrentPlayer == 1)
                     {
-                        currentScorePlayer1++;
+                        currentScorePlayer1 += 2;
+                        //MessageBox.Show("point for player 1");
                     }
                     else if (CurrentPlayer ==2)
                     {
-                        currentScorePlayer2++;
+                        currentScorePlayer2 += 2;
+                        MessageBox.Show("point for player 2");
                     }
+                    card1Flip = false;
+                    card2Flip = false;
                 }
 
                 else if (card1Image != card2Image)
@@ -157,48 +161,59 @@ namespace Memory_Game
 
         }
 
-
-
-        #region Labels
-        //Add title Label
-        private void TitleLabel()
+        //Generate new Grid that holds all the score labels
+        private void InitializeScoreGrid()
+        {
+            scoreGrid = new Grid();
+            
+            scoreGrid.ShowGridLines = true;
+            for (int i = 0; i < 1; i++)
+            {
+                scoreGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                scoreGrid.RowDefinitions.Add(new RowDefinition());
+            }
+            Grid.SetColumn(scoreGrid, 1);
+            grid.Children.Add(scoreGrid);
+        }
+        
+        //Generate all the labels that will be placed within the scoregrid.
+        private void Labels()
         {
             Label title = new Label();
             title.Content = "Memory";
             title.FontSize = 30;
-            title.HorizontalAlignment = HorizontalAlignment.Center;
+            title.HorizontalAlignment = HorizontalAlignment.Left;
             Grid.SetColumn(title, 1);
             Grid.SetRow(title, 0);
-            grid.Children.Add(title);
-        }
+            scoreGrid.Children.Add(title);
 
-        //Add labels related to the current score
-        private void ScoreLabel()
-        {
             Label currentScore = new Label();
             currentScore.Content = "Current Score";
             currentScore.FontSize = 20;
+            title.HorizontalAlignment = HorizontalAlignment.Left;
             Grid.SetColumn(currentScore, 1);
             Grid.SetRow(currentScore, 1);
-            grid.Children.Add(currentScore);
+            scoreGrid.Children.Add(currentScore);
 
             Label scorePlayer1 = new Label();
-            scorePlayer1.Content = "Player 1: " + currentScorePlayer1;
+            scorePlayer1.Content = "Player 1: " + currentScorePlayer1.ToString();
             scorePlayer1.FontSize = 20;
+            title.HorizontalAlignment = HorizontalAlignment.Left;
             Grid.SetColumn(scorePlayer1, 1);
             Grid.SetRow(scorePlayer1, 2);
-            grid.Children.Add(scorePlayer1);
-
+            scoreGrid.Children.Add(scorePlayer1);
 
             Label scorePlayer2 = new Label();
-            scorePlayer2.Content = "Player2: " + currentScorePlayer2;
+            scorePlayer2.Content = "Player2: " + Convert.ToString(currentScorePlayer2);
             scorePlayer2.FontSize = 20;
+            title.HorizontalAlignment = HorizontalAlignment.Left;
             Grid.SetColumn(scorePlayer2, 1);
             Grid.SetRow(scorePlayer2, 3);
-            grid.Children.Add(scorePlayer2);
+            scoreGrid.Children.Add(scorePlayer2);
 
         }
-        #endregion Labels
-
     }
 }

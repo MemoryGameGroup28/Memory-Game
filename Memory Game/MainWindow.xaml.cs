@@ -24,6 +24,9 @@ namespace Memory_Game
         private int GridRow = 4;
         private int GridCol = 4;
 
+        private int ScoreRow = 5;
+        private int ScoreCol = 1;
+
 
 
         //HOW TO USE A CLASS WITHIN THE MAIN WINDOW: 
