@@ -58,3 +58,5 @@ D:\Github Desktop\Memory-Game-New\Memory-Game\Memory Game\obj\Debug\Memory Game.
 D:\Github Desktop\Memory-Game-New\Memory-Game\Memory Game\obj\Debug\Memory Game.csproj.CoreCompileInputs.cache
 D:\Github Desktop\Memory-Game-New\Memory-Game\Memory Game\obj\Debug\Memory Game.exe
 D:\Github Desktop\Memory-Game-New\Memory-Game\Memory Game\obj\Debug\Memory Game.pdb
+D:\School\Memory-Game-Project-Group28\Memory-Game\Memory Game\obj\Debug\MainMenu.g.cs
+D:\School\Memory-Game-Project-Group28\Memory-Game\Memory Game\obj\Debug\MainMenu.baml
