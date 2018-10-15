@@ -161,6 +161,9 @@ namespace Memory_Game
 
         }
 
+        //stopover in bangkok
+
+
         //Generate new Grid that holds all the score labels
         private void InitializeScoreGrid()
         {
@@ -199,7 +202,7 @@ namespace Memory_Game
             scoreGrid.Children.Add(currentScore);
 
             Label scorePlayer1 = new Label();
-            scorePlayer1.Content = "Player 1: " + currentScorePlayer1.ToString();
+            scorePlayer1.Content =  "Player 1: " + Convert.ToString(currentScorePlayer1);
             scorePlayer1.FontSize = 20;
             title.HorizontalAlignment = HorizontalAlignment.Left;
             Grid.SetColumn(scorePlayer1, 1);
