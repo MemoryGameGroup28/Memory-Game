@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,7 +28,6 @@ namespace Memory_Game
         private Label scorePlayer1;
         private Label scorePlayer2;
 
-        private static Timer aTimer;
 
         private int ImageRows = 4;
         private int ImageCols = 4;
@@ -39,11 +39,14 @@ namespace Memory_Game
         private string namePlayer2 = null;
 
 
+        private DispatcherTimer aTimer = new DispatcherTimer();
         private bool card1Flip = false;
         private bool card2Flip = false;
         private Uri card1Image = null;
         private Uri card2Image = null;
-        private Uri backGroundImage = new Uri("Files/cardBackground.png", UriKind.Relative);
+        private Image card1 = null;
+        private Image card2 = null;
+
 
 
         public MemoryGrid(Grid grid, int GridCol, int GridRow)
@@ -54,7 +57,7 @@ namespace Memory_Game
             AddBackgroundImages();
             GetImagesList();    
             Labels();
-            
+
         }
 
         //Generate MemoryGrid with parameters assigned to ImageRows/Cols + GridRow/Col
@@ -129,6 +132,7 @@ namespace Memory_Game
                 card.Source = front;
                 card1Flip = true;
                 this.card1Image = (Uri)card.Tag;
+                this.card1 = card;
             }
             //On click access image URI from List<URI>, convert URI to Bitmap Image and store data from card 2 in card2Image
             else if (card1Flip == true && card2Flip == false)
@@ -139,6 +143,7 @@ namespace Memory_Game
                 card.Source = front;
                 card2Flip = true;
                 this.card2Image = (Uri)card.Tag;
+                this.card2 = card;
             }
             //Match function
             if (card1Flip && card2Flip == true)
@@ -162,9 +167,9 @@ namespace Memory_Game
                 else if (card1Image != card2Image)
                 {
                     //timer to return cards to original position after 1 second.
-                    aTimer = new Timer(1000);
-                    aTimer.Elapsed += OnTimedEvent;
-                    aTimer.AutoReset = false;
+                    aTimer = new DispatcherTimer();
+                    aTimer.Interval = TimeSpan.FromMilliseconds(1000);
+                    aTimer.Tick += timer_Tick;
                     aTimer.Start();
 
                 }
@@ -172,15 +177,18 @@ namespace Memory_Game
 
         }
         //After timer reaches 0, perform below action.
-        private void OnTimedEvent(object source, ElapsedEventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
             //Set image of card 1 && 2 = backgroundimag.png
             MessageBox.Show("No match");
             card1Flip = false;
             card2Flip = false;
             CurrentPlayer = 2;
-
+            card1.Source = new BitmapImage(new Uri("Files/cardBackground.png", UriKind.Relative)); //Set background image
+            card2.Source = new BitmapImage(new Uri("Files/cardBackground.png", UriKind.Relative)); //Set background image
+            aTimer.Stop();
         }
+        
 
         //Generate new Grid that holds all the score labels
         private void InitializeScoreGrid()
