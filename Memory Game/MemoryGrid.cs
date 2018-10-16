@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Timers;
 
 
 namespace Memory_Game
@@ -22,7 +23,11 @@ namespace Memory_Game
         private Grid grid;
         private Grid mainGrid; //grid containing all memory cards
         private Grid scoreGrid;
-        
+
+        private Label scorePlayer1;
+        private Label scorePlayer2;
+
+        private static Timer aTimer;
 
         private int ImageRows = 4;
         private int ImageCols = 4;
@@ -30,13 +35,15 @@ namespace Memory_Game
         private int CurrentPlayer = 0;
         private int currentScorePlayer1 = 0;
         private int currentScorePlayer2 = 0;
+        private string namePlayer1 = null;
+        private string namePlayer2 = null;
 
 
         private bool card1Flip = false;
         private bool card2Flip = false;
         private Uri card1Image = null;
         private Uri card2Image = null;
-
+        private Uri backGroundImage = new Uri("Files/cardBackground.png", UriKind.Relative);
 
 
         public MemoryGrid(Grid grid, int GridCol, int GridRow)
@@ -45,8 +52,9 @@ namespace Memory_Game
             InitializeMemoryGrid(GridCol, GridRow);
             InitializeScoreGrid();
             AddBackgroundImages();
-            GetImagesList();
+            GetImagesList();    
             Labels();
+            
         }
 
         //Generate MemoryGrid with parameters assigned to ImageRows/Cols + GridRow/Col
@@ -85,7 +93,6 @@ namespace Memory_Game
                     Grid.SetColumn(backgroundImage, GridCol);
                     Grid.SetRow(backgroundImage, GridRow);
                     mainGrid.Children.Add(backgroundImage);
-
                 }
             }
         }
@@ -112,6 +119,7 @@ namespace Memory_Game
         //On click event when user clicks on a card
         private void CardClick(object sender, MouseButtonEventArgs e)
         {
+
             CurrentPlayer = 1;
             //On click access image URI from List<URI>, convert URI to Bitmap Image and store data from card 1 in card1Image
             if (card1Flip == false)
@@ -139,13 +147,13 @@ namespace Memory_Game
                 {
                     if (CurrentPlayer == 1)
                     {
-                        currentScorePlayer1 += 2;
-                        //MessageBox.Show("point for player 1");
+                        currentScorePlayer1++;
+                        scorePlayer1.Content = currentScorePlayer1;
                     }
-                    else if (CurrentPlayer ==2)
+                    else if (CurrentPlayer == 2)
                     {
-                        currentScorePlayer2 += 2;
-                        MessageBox.Show("point for player 2");
+                        currentScorePlayer2++;
+                        scorePlayer2.Content = currentScorePlayer2;
                     }
                     card1Flip = false;
                     card2Flip = false;
@@ -153,16 +161,26 @@ namespace Memory_Game
 
                 else if (card1Image != card2Image)
                 {
-                    card1Flip = false;
-                    card2Flip = false;
-                    CurrentPlayer = 2;
+                    //timer to return cards to original position after 1 second.
+                    aTimer = new Timer(1000);
+                    aTimer.Elapsed += OnTimedEvent;
+                    aTimer.AutoReset = false;
+                    aTimer.Start();
+
                 }
             }
 
         }
+        //After timer reaches 0, perform below action.
+        private void OnTimedEvent(object source, ElapsedEventArgs e)
+        {
+            //Set image of card 1 && 2 = backgroundimag.png
+            MessageBox.Show("No match");
+            card1Flip = false;
+            card2Flip = false;
+            CurrentPlayer = 2;
 
-        //stopover in bangkok
-
+        }
 
         //Generate new Grid that holds all the score labels
         private void InitializeScoreGrid()
@@ -196,27 +214,28 @@ namespace Memory_Game
             Label currentScore = new Label();
             currentScore.Content = "Current Score";
             currentScore.FontSize = 20;
-            title.HorizontalAlignment = HorizontalAlignment.Left;
+            currentScore.HorizontalAlignment = HorizontalAlignment.Left;
             Grid.SetColumn(currentScore, 1);
             Grid.SetRow(currentScore, 1);
             scoreGrid.Children.Add(currentScore);
 
-            Label scorePlayer1 = new Label();
-            scorePlayer1.Content =  "Player 1: " + Convert.ToString(currentScorePlayer1);
+            scorePlayer1 = new Label();
+            scorePlayer1.Content = "Player1: " + currentScorePlayer1;
             scorePlayer1.FontSize = 20;
-            title.HorizontalAlignment = HorizontalAlignment.Left;
+            scorePlayer1.HorizontalAlignment = HorizontalAlignment.Left;
             Grid.SetColumn(scorePlayer1, 1);
             Grid.SetRow(scorePlayer1, 2);
             scoreGrid.Children.Add(scorePlayer1);
 
-            Label scorePlayer2 = new Label();
-            scorePlayer2.Content = "Player2: " + Convert.ToString(currentScorePlayer2);
+            scorePlayer2 = new Label();
+            scorePlayer2.Content = "Player2: " + currentScorePlayer2;
             scorePlayer2.FontSize = 20;
-            title.HorizontalAlignment = HorizontalAlignment.Left;
+            scorePlayer2.HorizontalAlignment = HorizontalAlignment.Left;
             Grid.SetColumn(scorePlayer2, 1);
             Grid.SetRow(scorePlayer2, 3);
             scoreGrid.Children.Add(scorePlayer2);
 
         }
+        
     }
 }
