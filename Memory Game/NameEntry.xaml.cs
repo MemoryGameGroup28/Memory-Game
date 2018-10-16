@@ -16,22 +16,21 @@ using System.Windows.Shapes;
 namespace Memory_Game
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for NameEntry.xaml
     /// </summary>
-    public partial class Window1 : Window
-    {
-        public Window1()
+    public partial class NameEntry : Window
+    {      
+        public NameEntry()
         {
             InitializeComponent();
         }
 
         
 
-        private void Start_Game_Click(object sender, RoutedEventArgs e)
-        {
-            new NameEntry().Show();
-            this.Close();
-        }
+
+
+        // Menu bar clicks.
+
         private void Exit_Game_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -42,13 +41,32 @@ namespace Memory_Game
             Process.Start(Application.ResourceAssembly.Location);
             Application.Current.Shutdown();
         }
-
+        
         private void Highscores_Click(object sender, RoutedEventArgs e)
         {
             new Highscores().Show();
             this.Close();
         }
+
+        // player 1 name
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+        }
+
+        // player 2 name
+        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        // Start game click
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
+
 
 
 }

@@ -1,0 +1,38 @@
+﻿<Window x:Class="Memory_Game.NameEntry"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Memory_Game"
+        mc:Ignorable="d"
+        Title="NameEntry" Height="450" Width="800">
+    <StackPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Menu">
+                <MenuItem Header="_Highscores" Click="Highscores_Click" />
+                <MenuItem Header="_Restart" Click="Restart_Game_Click" />
+                <MenuItem Header="_Exit" Click="Exit_Game_Click" />
+
+
+            </MenuItem>
+        </Menu>
+
+        <TextBlock Text="Player Name Entry" FontWeight="Bold" TextAlignment="Center" Margin="5" />
+        
+        <TextBlock Text="Player 1" TextAlignment="Center" Margin="5"/>
+        
+        <TextBox Name="txtPlayer1" Padding="3" TextChanged="TextBox_TextChanged"/>
+
+        <TextBlock Text="Player 2" TextAlignment="Center" Margin="5"/>
+        
+        <TextBox Name="txtPlayer2" Padding="3" TextChanged="TextBox_TextChanged_1"/>
+        
+        <Button x:Name="btnStartGame" Margin="200 20 200 0" Content="Start Game" Click="Button_Click"></Button>
+        
+        <Grid>
+        
+    </Grid>
+     
+
+    </StackPanel>
+</Window>
