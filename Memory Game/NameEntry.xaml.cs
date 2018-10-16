@@ -62,8 +62,9 @@ namespace Memory_Game
 
         // Start game click
         private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
+        {          
+                new MainWindow().Show();
+                this.Close();          
         }
     }
 
