@@ -81,3 +81,24 @@ D:\Github Desktop\Memory-Game\Memory-Game\Memory Game\obj\Debug\Memory Game.g.re
 D:\Github Desktop\Memory-Game\Memory-Game\Memory Game\obj\Debug\Memory_Game.Properties.Resources.resources
 D:\Github Desktop\Memory-Game\Memory-Game\Memory Game\obj\Debug\Memory Game.csproj.GenerateResource.cache
 D:\Github Desktop\Memory-Game\Memory-Game\Memory Game\obj\Debug\Memory Game.csproj.CoreCompileInputs.cache
+C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\bin\Debug\Memory Game.exe.config
+C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\bin\Debug\Memory Game.exe
+C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\bin\Debug\Memory Game.pdb
+C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\obj\Debug\Memory Game.csprojAssemblyReference.cache
+C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\obj\Debug\Highscores.g.cs
+C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\obj\Debug\MainMenu.g.cs
+C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\obj\Debug\MainWindow.g.cs
+C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\obj\Debug\NameEntry.g.cs
+C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\obj\Debug\App.g.cs
+C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\obj\Debug\Memory Game_MarkupCompile.cache
+C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\obj\Debug\Memory Game_MarkupCompile.lref
+C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\obj\Debug\Highscores.baml
+C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\obj\Debug\MainMenu.baml
+C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\obj\Debug\MainWindow.baml
+C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\obj\Debug\NameEntry.baml
+C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\obj\Debug\Memory Game.g.resources
+C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\obj\Debug\Memory_Game.Properties.Resources.resources
+C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\obj\Debug\Memory Game.csproj.GenerateResource.cache
+C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\obj\Debug\Memory Game.csproj.CoreCompileInputs.cache
+C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\obj\Debug\Memory Game.exe
+C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\obj\Debug\Memory Game.pdb

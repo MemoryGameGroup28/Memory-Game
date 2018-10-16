@@ -113,10 +113,21 @@ namespace Memory_Game
             }
             //IMAGE RANDOMZER COMES HERE
 
+            List<Uri> randomList = new List<Uri>();
 
+            Random r = new Random();
+            int randomIndex = 0;
+            while (images.Count > 0)
+            {
+                randomIndex = r.Next(0, images.Count); //Choose a random object in the list
+                randomList.Add(images[randomIndex]); //add it to the new, random list
+                images.RemoveAt(randomIndex); //remove to avoid duplicates
+            }
+
+            return randomList; //return the new random list
 
             //------------------------------//
-            return images;
+            
         }
 
         //On click event when user clicks on a card
@@ -180,7 +191,8 @@ namespace Memory_Game
         private void timer_Tick(object sender, EventArgs e)
         {
             //Set image of card 1 && 2 = backgroundimag.png
-            MessageBox.Show("No match");
+            
+          
             card1Flip = false;
             card2Flip = false;
             CurrentPlayer = 2;
