@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,7 +60,28 @@ namespace Memory_Game
             GameGrid.ColumnDefinitions.Add(scoreColumn);
 
         }
+        // menu controls
+        private void Exit_Game_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
 
+        private void Restart_Game_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
+        }
+
+        private void Highscores_Click(object sender, RoutedEventArgs e)
+        {
+            new Highscores().Show();
+            this.Close();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
 }
