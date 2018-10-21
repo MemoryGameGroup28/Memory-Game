@@ -299,11 +299,11 @@ namespace Memory_Game
             Match.Stream = Properties.Resources.Scored;
             scored = Match;
 
-            MediaPlayer backgroundMusic = new MediaPlayer();
-            backgroundMusic.Open(new Uri(@"D:\School\Memory-Game-Project-Group28\Memory-Game\Memory Game\Files\ThemeMusic.wav"));
-            themeMusic = backgroundMusic;
-            themeMusic.Position = TimeSpan.FromMilliseconds(1);
-            themeMusic.Play();
+            //MediaPlayer backgroundMusic = new MediaPlayer();
+            //backgroundMusic.Open(new Uri("ThemeMusic.wav", UriKind.Relative));
+            //themeMusic = backgroundMusic;
+            //themeMusic.Position = TimeSpan.FromMilliseconds(1);
+            //themeMusic.Play();
         }
 
 

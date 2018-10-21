@@ -77,14 +77,5 @@ namespace Memory_Game.Properties {
                 return ResourceManager.GetStream("Scored", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream ThemeMusic {
-            get {
-                return ResourceManager.GetStream("ThemeMusic", resourceCulture);
-            }
-        }
     }
 }
