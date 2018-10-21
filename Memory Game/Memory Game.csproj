@@ -129,5 +129,10 @@
   <ItemGroup>
     <Resource Include="Files\cardBackground.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Files\Negative.wav" />
+    <None Include="Files\Scored.wav" />
+    <Content Include="Files\ThemeMusic.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

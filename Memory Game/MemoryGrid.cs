@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Timers;
+using System.Media;
+
 
 
 namespace Memory_Game
@@ -21,43 +23,54 @@ namespace Memory_Game
     public class MemoryGrid
     {
         // Create the Grid
-        private Grid grid;
+        private Grid grid; //main grid containing memory card and score label grids
         private Grid mainGrid; //grid containing all memory cards
-        private Grid scoreGrid;
-
-        private Label scorePlayer1;
-        private Label scorePlayer2;
-
-
+        private Grid scoreGrid; //grid containing score labels
+        
+        //Variables defining width and height of mainGrid
         private int ImageRows = 4;
         private int ImageCols = 4;
 
-        private int CurrentPlayer = 0;
-        private int currentScorePlayer1 = 0;
-        private int currentScorePlayer2 = 0;
-        private string namePlayer1 = null;
-        private string namePlayer2 = null;
+        //Sound variables
+        private SoundPlayer negative = new SoundPlayer();
+        private SoundPlayer scored = new SoundPlayer();
+        private MediaPlayer themeMusic = new MediaPlayer();
 
 
-        private DispatcherTimer aTimer = new DispatcherTimer();
-        private bool card1Flip = false;
-        private bool card2Flip = false;
-        private Uri card1Image = null;
-        private Uri card2Image = null;
-        private Image card1 = null;
-        private Image card2 = null;
+        //private SoundPlayer themeMusic = new SoundPlayer();
+
+        //Label vairables
+        private Label scorePlayer1;
+        private Label scorePlayer2;
+        
+        //Score variables
+        private int currentPlayer = 0; //Checks which player's turn it is
+        private int currentScorePlayer1 = 0; //Keeps track of the score of player 1
+        private int currentScorePlayer2 = 0; //Keeps track of the score of player 2
+        private string namePlayer1 = null; //Stores the name of player 1 filled in from the main menu
+        private string namePlayer2 = null; //Stores the name of player 2 filled in from the main menu
+
+        //Card variables
+        private DispatcherTimer aTimer = new DispatcherTimer(); //Time indicating when cards need to flip back if there is no match
+        private bool card1Flip = false; //Checks if the user has clicked on a 1st card
+        private bool card2Flip = false; //Checks if the user has clicked on a 2nd card
+        private Uri card1Image = null; //Stores the URI (image location) of card 1
+        private Uri card2Image = null; //Stores the URI (image location) of card 2
+        private Image card1 = null; //stores which card has been clicked first (location on the board / location in the list)
+        private Image card2 = null; //stores which card has been clicked second (location on the board / location in the list)
 
 
 
         public MemoryGrid(Grid grid, int GridCol, int GridRow)
         {
             this.grid = grid;
+            currentPlayer = 1;
             InitializeMemoryGrid(GridCol, GridRow);
             InitializeScoreGrid();
             AddBackgroundImages();
             GetImagesList();    
             Labels();
-
+            Sounds();
         }
 
         //Generate MemoryGrid with parameters assigned to ImageRows/Cols + GridRow/Col
@@ -133,8 +146,6 @@ namespace Memory_Game
         //On click event when user clicks on a card
         private void CardClick(object sender, MouseButtonEventArgs e)
         {
-
-            CurrentPlayer = 1;
             //On click access image URI from List<URI>, convert URI to Bitmap Image and store data from card 1 in card1Image
             if (card1Flip == false)
             {
@@ -161,15 +172,19 @@ namespace Memory_Game
             {
                 if(card1Image.Equals(card2Image))
                 {
-                    if (CurrentPlayer == 1)
+                    if (currentPlayer == 1)
                     {
                         currentScorePlayer1++;
-                        scorePlayer1.Content = currentScorePlayer1;
+                        scorePlayer1.Content = "Player 1: " + currentScorePlayer1;
+                        scored.Load();
+                        scored.Play();
                     }
-                    else if (CurrentPlayer == 2)
+                    else if (currentPlayer == 2)
                     {
                         currentScorePlayer2++;
-                        scorePlayer2.Content = currentScorePlayer2;
+                        scorePlayer2.Content = "Player 2: " + currentScorePlayer2;
+                        scored.Load();
+                        scored.Play();
                     }
                     card1Flip = false;
                     card2Flip = false;
@@ -182,6 +197,24 @@ namespace Memory_Game
                     aTimer.Interval = TimeSpan.FromMilliseconds(1000);
                     aTimer.Tick += timer_Tick;
                     aTimer.Start();
+                    if (currentPlayer == 1)
+                    {
+                        currentPlayer = 2;
+                        scorePlayer1.Foreground = Brushes.Black;
+                        scorePlayer2.Foreground = Brushes.Green;
+                        negative.Load();
+                        negative.Play();
+
+                    }
+                    else if (currentPlayer == 2)
+                    {
+                        currentPlayer = 1;
+                        scorePlayer2.Foreground = Brushes.Black;
+                        scorePlayer1.Foreground = Brushes.Green;
+                        negative.Load();
+                        negative.Play();
+                    }
+
 
                 }
             }
@@ -191,11 +224,8 @@ namespace Memory_Game
         private void timer_Tick(object sender, EventArgs e)
         {
             //Set image of card 1 && 2 = backgroundimag.png
-            
-          
             card1Flip = false;
             card2Flip = false;
-            CurrentPlayer = 2;
             card1.Source = new BitmapImage(new Uri("Files/cardBackground.png", UriKind.Relative)); //Set background image
             card2.Source = new BitmapImage(new Uri("Files/cardBackground.png", UriKind.Relative)); //Set background image
             aTimer.Stop();
@@ -241,21 +271,42 @@ namespace Memory_Game
 
             scorePlayer1 = new Label();
             scorePlayer1.Content = "Player1: " + currentScorePlayer1;
+            scorePlayer1.Foreground = Brushes.Green;
             scorePlayer1.FontSize = 20;
             scorePlayer1.HorizontalAlignment = HorizontalAlignment.Left;
             Grid.SetColumn(scorePlayer1, 1);
             Grid.SetRow(scorePlayer1, 2);
             scoreGrid.Children.Add(scorePlayer1);
+            
 
             scorePlayer2 = new Label();
             scorePlayer2.Content = "Player2: " + currentScorePlayer2;
             scorePlayer2.FontSize = 20;
+            scorePlayer2.Foreground = Brushes.Black;
             scorePlayer2.HorizontalAlignment = HorizontalAlignment.Left;
             Grid.SetColumn(scorePlayer2, 1);
             Grid.SetRow(scorePlayer2, 3);
             scoreGrid.Children.Add(scorePlayer2);
-
         }
-        
+
+        private void Sounds()
+        {
+            SoundPlayer noMatch = new SoundPlayer();
+            noMatch.Stream = Properties.Resources.Negative;
+            negative = noMatch;
+
+            SoundPlayer Match = new SoundPlayer();
+            Match.Stream = Properties.Resources.Scored;
+            scored = Match;
+
+            MediaPlayer backgroundMusic = new MediaPlayer();
+            backgroundMusic.Open(new Uri(@"D:\School\Memory-Game-Project-Group28\Memory-Game\Memory Game\Files\ThemeMusic.wav"));
+            themeMusic = backgroundMusic;
+            themeMusic.Position = TimeSpan.FromMilliseconds(1);
+            themeMusic.Play();
+        }
+
+
+
     }
 }

@@ -102,3 +102,8 @@ C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\obj\Debug\Memory Ga
 C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\obj\Debug\Memory Game.csproj.CoreCompileInputs.cache
 C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\obj\Debug\Memory Game.exe
 C:\Users\hedde\Documents\memory game\Memory-Game\Memory Game\obj\Debug\Memory Game.pdb
+D:\School\Memory-Game-Project-Group28\Memory-Game\Memory Game\obj\Debug\Highscores.g.cs
+D:\School\Memory-Game-Project-Group28\Memory-Game\Memory Game\obj\Debug\NameEntry.g.cs
+D:\School\Memory-Game-Project-Group28\Memory-Game\Memory Game\obj\Debug\Highscores.baml
+D:\School\Memory-Game-Project-Group28\Memory-Game\Memory Game\obj\Debug\NameEntry.baml
+D:\School\Memory-Game-Project-Group28\Memory-Game\Memory Game\obj\Debug\Memory Game_Content.g.cs
