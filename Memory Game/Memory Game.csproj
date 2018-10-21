@@ -107,6 +107,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -128,6 +129,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Files\cardBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Files\Negative.wav" />
+    <Content Include="ThemeMusic.wav" />
+    <None Include="Files\Scored.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
