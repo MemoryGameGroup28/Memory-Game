@@ -9,6 +9,5 @@
 //------------------------------------------------------------------------------
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("files/negative.wav")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("thememusic.wav")]
 
 
