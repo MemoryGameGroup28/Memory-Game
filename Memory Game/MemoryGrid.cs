@@ -18,6 +18,7 @@ using System.Media;
 
 
 
+
 namespace Memory_Game
 {
     public class MemoryGrid
@@ -35,8 +36,6 @@ namespace Memory_Game
         private SoundPlayer negative = new SoundPlayer();
         private SoundPlayer scored = new SoundPlayer();
         private MediaPlayer themeMusic = new MediaPlayer();
-
-
         //private SoundPlayer themeMusic = new SoundPlayer();
 
         //Label vairables
@@ -299,11 +298,18 @@ namespace Memory_Game
             Match.Stream = Properties.Resources.Scored;
             scored = Match;
 
-            //MediaPlayer backgroundMusic = new MediaPlayer();
-            //backgroundMusic.Open(new Uri("ThemeMusic.wav", UriKind.Relative));
-            //themeMusic = backgroundMusic;
-            //themeMusic.Position = TimeSpan.FromMilliseconds(1);
-            //themeMusic.Play();
+            MediaPlayer backgroundMusic = new MediaPlayer();
+            backgroundMusic.Open(new Uri("ThemeMusic.wav", UriKind.Relative));
+            themeMusic = backgroundMusic;
+            themeMusic.MediaEnded += new EventHandler(Media_Ended);
+            themeMusic.Play();
+
+        }
+        //If the themeMusic ends below function will ensure the music gets looped.
+        private void Media_Ended(object sender, EventArgs e)
+        {
+            themeMusic.Position = TimeSpan.Zero;
+            themeMusic.Play();
         }
 
 
