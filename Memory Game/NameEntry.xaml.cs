@@ -49,21 +49,41 @@ namespace Memory_Game
         }
 
         // player 1 name
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        public void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+            string Player1Name = txtPlayer1.Text;
         }
 
         // player 2 name
-        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
+        public void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
         {
-
+            string Player2Name = txtPlayer2.Text;
         }
+
+        // player 3 name
+        public void TextBox_TextChanged_2(object sender, TextChangedEventArgs e)
+        {
+            string Player3Name = txtPlayer3.Text;
+        }
+
+        // player 4 name
+        public void TextBox_TextChanged_3(object sender, TextChangedEventArgs e)
+        {
+            string Player4Name = txtPlayer4.Text;
+        }
+
 
         // Start game click
         private void Button_Click(object sender, RoutedEventArgs e)
-        {          
-                new MainWindow().Show();
+        {
+            //Saving of player names to user settings
+            Memory_Game.Properties.Settings.Default.Player1Name = txtPlayer1.Text;
+            Memory_Game.Properties.Settings.Default.Player2Name = txtPlayer2.Text;
+            Memory_Game.Properties.Settings.Default.Player3Name = txtPlayer3.Text;
+            Memory_Game.Properties.Settings.Default.Player4Name = txtPlayer4.Text;
+            Memory_Game.Properties.Settings.Default.Save();
+
+            new MainWindow().Show();
                 this.Close();          
         }
     }
