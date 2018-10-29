@@ -269,7 +269,7 @@ namespace Memory_Game
             scoreGrid.Children.Add(currentScore);
 
             scorePlayer1 = new Label();
-            scorePlayer1.Content = "Player1: " + currentScorePlayer1;
+            scorePlayer1.Content = Memory_Game.Properties.Settings.Default.Player1Name + ":" + currentScorePlayer1;
             scorePlayer1.Foreground = Brushes.Green;
             scorePlayer1.FontSize = 20;
             scorePlayer1.HorizontalAlignment = HorizontalAlignment.Left;
@@ -279,7 +279,7 @@ namespace Memory_Game
             
 
             scorePlayer2 = new Label();
-            scorePlayer2.Content = "Player2: " + currentScorePlayer2;
+            scorePlayer2.Content = Memory_Game.Properties.Settings.Default.Player2Name + ":" + currentScorePlayer2;
             scorePlayer2.FontSize = 20;
             scorePlayer2.Foreground = Brushes.Black;
             scorePlayer2.HorizontalAlignment = HorizontalAlignment.Left;
