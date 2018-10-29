@@ -51,10 +51,10 @@ namespace Memory_Game
         private int currentScorePlayer3 = 0; //Keeps track of the score of player 3
         private int currentScorePlayer4 = 0; //Keeps track of the score of player 4
 
-        private string namePlayer1 = null; //Stores the name of player 1 filled in from the main menu
-        private string namePlayer2 = null; //Stores the name of player 2 filled in from the main menu
-        private string namePlayer3 = null; //Stores the name of player 3 filled in from the main menu
-        private string namePlayer4 = null; //Stores the name of player 4 filled in from the main menu
+        private string namePlayer1 = Memory_Game.Properties.Settings.Default.Player1Name; //Stores the name of player 1 filled in from the main menu
+        private string namePlayer2 = Memory_Game.Properties.Settings.Default.Player2Name; //Stores the name of player 2 filled in from the main menu
+        private string namePlayer3 = Memory_Game.Properties.Settings.Default.Player3Name; //Stores the name of player 3 filled in from the main menu
+        private string namePlayer4 = Memory_Game.Properties.Settings.Default.Player4Name; //Stores the name of player 4 filled in from the main menu
 
         //Card variables
         private DispatcherTimer aTimer = new DispatcherTimer(); //Time indicating when cards need to flip back if there is no match
@@ -64,7 +64,7 @@ namespace Memory_Game
         private Uri card2Image = null; //Stores the URI (image location) of card 2
         private Image card1 = null; //stores which card has been clicked first (location on the board / location in the list)
         private Image card2 = null; //stores which card has been clicked second (location on the board / location in the list)
-
+        private int currentMatches = 0;
 
 
         public MemoryGrid(Grid grid, int GridCol, int GridRow)
@@ -181,33 +181,38 @@ namespace Memory_Game
                     if (currentPlayer == 1)
                     {
                         currentScorePlayer1++;
-                        scorePlayer1.Content = "Player 1: " + currentScorePlayer1;
+                        scorePlayer1.Content = namePlayer1 + currentScorePlayer1;
                         scored.Load();
                         scored.Play();
+                        currentMatches++;
                     }
                     else if (currentPlayer == 2)
                     {
                         currentScorePlayer2++;
-                        scorePlayer2.Content = "Player 2: " + currentScorePlayer2;
+                        scorePlayer2.Content = namePlayer2 + currentScorePlayer2;
                         scored.Load();
                         scored.Play();
+                        currentMatches++;
                     }
                     else if (currentPlayer == 3)
                     {
                         currentScorePlayer2++;
-                        scorePlayer3.Content = "Player 3: " + currentScorePlayer2;
+                        scorePlayer3.Content = namePlayer3 + currentScorePlayer2;
                         scored.Load();
                         scored.Play();
+                        currentMatches++;
                     }
                     else if (currentPlayer == 4)
                     {
                         currentScorePlayer2++;
-                        scorePlayer3.Content = "Player 3: " + currentScorePlayer2;
+                        scorePlayer3.Content = namePlayer4 + currentScorePlayer2;
                         scored.Load();
                         scored.Play();
+                        currentMatches++;
                     }
                     card1Flip = false;
                     card2Flip = false;
+                    matches();
                 }
 
                 else if (card1Image != card2Image)
@@ -363,6 +368,14 @@ namespace Memory_Game
             grid.Children.Add(scoreGrid);
         }
         
+        private void matches()
+        {
+            if (currentMatches == 8)
+            {
+                MessageBox.Show("Congratulatuons you've found all the matches");
+            }
+        }
+
         //Generate all the labels that will be placed within the scoregrid.
         private void Labels()
         {
@@ -375,7 +388,7 @@ namespace Memory_Game
             scoreGrid.Children.Add(title);
 
             Label currentScore = new Label();
-            currentScore.Content = "Current Score";
+            currentScore.Content = "Scores";
             currentScore.FontSize = 20;
             currentScore.HorizontalAlignment = HorizontalAlignment.Left;
             Grid.SetColumn(currentScore, 1);
@@ -383,29 +396,29 @@ namespace Memory_Game
             scoreGrid.Children.Add(currentScore);
 
             scorePlayer1 = new Label();
-            scorePlayer1.Content = Memory_Game.Properties.Settings.Default.Player1Name + ":" + currentScorePlayer1;
+            scorePlayer1.Content = namePlayer1 + ":" + currentScorePlayer1;
             scorePlayer1.Foreground = Brushes.Green;
-            scorePlayer1.FontSize = 20;
+            scorePlayer1.FontSize = 25;
             scorePlayer1.HorizontalAlignment = HorizontalAlignment.Left;
             Grid.SetColumn(scorePlayer1, 1);
             Grid.SetRow(scorePlayer1, 2);
             scoreGrid.Children.Add(scorePlayer1);
             
-            if (namePlayer2 != null) { 
+            
             scorePlayer2 = new Label();
-            scorePlayer2.Content = Memory_Game.Properties.Settings.Default.Player2Name + ":" + currentScorePlayer2;
+            scorePlayer2.Content = namePlayer2 + ":" + currentScorePlayer2;
             scorePlayer2.FontSize = 20;
             scorePlayer2.Foreground = Brushes.Black;
             scorePlayer2.HorizontalAlignment = HorizontalAlignment.Left;
             Grid.SetColumn(scorePlayer2, 1);
             Grid.SetRow(scorePlayer2, 3);
             scoreGrid.Children.Add(scorePlayer2);
-            }
+            
 
             if (namePlayer3 != null)
             {
                 scorePlayer3 = new Label();
-                scorePlayer3.Content = "Player3: " + currentScorePlayer3;
+                scorePlayer3.Content = namePlayer3  + currentScorePlayer3;
                 scorePlayer3.Foreground = Brushes.Black;
                 scorePlayer3.FontSize = 20;
                 scorePlayer3.HorizontalAlignment = HorizontalAlignment.Left;
@@ -416,7 +429,7 @@ namespace Memory_Game
             if (namePlayer4 != null)
             {
                 scorePlayer4 = new Label();
-                scorePlayer4.Content = "Player4: " + currentScorePlayer4;
+                scorePlayer4.Content = namePlayer4 + currentScorePlayer4;
                 scorePlayer4.Foreground = Brushes.Black;
                 scorePlayer4.FontSize = 20;
                 scorePlayer4.HorizontalAlignment = HorizontalAlignment.Left;
