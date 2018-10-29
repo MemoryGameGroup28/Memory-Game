@@ -6,7 +6,5 @@
         xmlns:local="clr-namespace:Memory_Game"
         mc:Ignorable="d"
         Title="Highscores" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <Grid/>
 </Window>

@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 using System.Timers;
 using System.Media;
 
-
-
-
 namespace Memory_Game
 {
     public class MemoryGrid
@@ -41,13 +38,20 @@ namespace Memory_Game
         //Label vairables
         private Label scorePlayer1;
         private Label scorePlayer2;
-        
+        private Label scorePlayer3;
+        private Label scorePlayer4;
+
         //Score variables
         private int currentPlayer = 0; //Checks which player's turn it is
         private int currentScorePlayer1 = 0; //Keeps track of the score of player 1
         private int currentScorePlayer2 = 0; //Keeps track of the score of player 2
+        private int currentScorePlayer3 = 0; //Keeps track of the score of player 3
+        private int currentScorePlayer4 = 0; //Keeps track of the score of player 4
+
         private string namePlayer1 = null; //Stores the name of player 1 filled in from the main menu
         private string namePlayer2 = null; //Stores the name of player 2 filled in from the main menu
+        private string namePlayer3 = null; //Stores the name of player 3 filled in from the main menu
+        private string namePlayer4 = null; //Stores the name of player 4 filled in from the main menu
 
         //Card variables
         private DispatcherTimer aTimer = new DispatcherTimer(); //Time indicating when cards need to flip back if there is no match
@@ -185,12 +189,28 @@ namespace Memory_Game
                         scored.Load();
                         scored.Play();
                     }
+                    else if(currentPlayer == 3)
+                    {
+                        currentScorePlayer2++;
+                        scorePlayer3.Content = "Player 3: " + currentScorePlayer2;
+                        scored.Load();
+                        scored.Play();
+                    }
+                    else if(currentPlayer == 4)
+                    {
+                        currentScorePlayer2++;
+                        scorePlayer3.Content = "Player 3: " + currentScorePlayer2;
+                        scored.Load();
+                        scored.Play();
+                    }
                     card1Flip = false;
                     card2Flip = false;
                 }
 
                 else if (card1Image != card2Image)
                 {
+
+                    Mouse.OverrideCursor = Cursors.None;
                     //timer to return cards to original position after 1 second.
                     aTimer = new DispatcherTimer();
                     aTimer.Interval = TimeSpan.FromMilliseconds(1000);
@@ -198,18 +218,108 @@ namespace Memory_Game
                     aTimer.Start();
                     if (currentPlayer == 1)
                     {
-                        currentPlayer = 2;
-                        scorePlayer1.Foreground = Brushes.Black;
-                        scorePlayer2.Foreground = Brushes.Green;
+                        if(namePlayer2 != null)
+                        {
+                            currentPlayer = 2;
+                            scorePlayer1.Foreground = Brushes.Black;
+                            scorePlayer2.Foreground = Brushes.Green;
+                            scorePlayer1.FontSize = 20;
+                            scorePlayer2.FontSize = 25;
+                        }
+                        if(namePlayer2 == null)
+                        {
+                            if (namePlayer3 != null)
+                            {
+                                currentPlayer = 3;
+                                scorePlayer1.Foreground = Brushes.Black;
+                                scorePlayer3.Foreground = Brushes.Green;
+                                scorePlayer1.FontSize = 20;
+                                scorePlayer3.FontSize = 25;
+                            }
+                            else if (namePlayer3 == null)
+                            {
+                                if (namePlayer4 != null)
+                                {
+                                    currentPlayer = 4;
+                                    scorePlayer1.Foreground = Brushes.Black;
+                                    scorePlayer4.Foreground = Brushes.Green;
+                                    scorePlayer1.FontSize = 20;
+                                    scorePlayer4.FontSize = 25;
+                                }
+                                else if (namePlayer4 == null)
+                                {
+                                    currentPlayer = 1;
+                                    scorePlayer1.Foreground = Brushes.Green;
+                                    scorePlayer1.FontSize = 25;
+                                }
+                            }
+                        }
                         negative.Load();
                         negative.Play();
-
                     }
+
                     else if (currentPlayer == 2)
                     {
+                        if (namePlayer3 != null)
+                        {
+                            currentPlayer = 3;
+                            scorePlayer2.Foreground = Brushes.Black;
+                            scorePlayer3.Foreground = Brushes.Green;
+                            scorePlayer2.FontSize = 20;
+                            scorePlayer3.FontSize = 25;
+                        }
+                        else if (namePlayer3 == null)
+                        {
+                            if (namePlayer4 != null)
+                            {
+                                currentPlayer = 4;
+                                scorePlayer2.Foreground = Brushes.Black;
+                                scorePlayer4.Foreground = Brushes.Green;
+                                scorePlayer2.FontSize = 20;
+                                scorePlayer4.FontSize = 25;
+                            }
+                            else if(namePlayer4 == null)
+                            {
+                                currentPlayer = 1;
+                                scorePlayer2.Foreground = Brushes.Black;
+                                scorePlayer1.Foreground = Brushes.Green;
+                                scorePlayer2.FontSize = 20;
+                                scorePlayer1.FontSize = 25;
+                            }
+                        }
+                        negative.Load();
+                        negative.Play();
+                    }
+
+                    else if(currentPlayer == 3)
+                    {
+                        if (namePlayer4 != null)
+                        {
+                            currentPlayer = 4;
+                            scorePlayer3.Foreground = Brushes.Black;
+                            scorePlayer4.Foreground = Brushes.Green;
+                            scorePlayer3.FontSize = 20;
+                            scorePlayer4.FontSize = 25;
+                        }
+                        else if (namePlayer4 == null)
+                        {
+                            currentPlayer = 1;
+                            scorePlayer3.Foreground = Brushes.Black;
+                            scorePlayer1.Foreground = Brushes.Green;
+                            scorePlayer3.FontSize = 20;
+                            scorePlayer1.FontSize = 25;
+                        }
+                        negative.Load();
+                        negative.Play();
+                    }
+
+                    else if(currentPlayer == 4)
+                    {
                         currentPlayer = 1;
-                        scorePlayer2.Foreground = Brushes.Black;
+                        scorePlayer4.Foreground = Brushes.Black;
                         scorePlayer1.Foreground = Brushes.Green;
+                        scorePlayer4.FontSize = 20;
+                        scorePlayer1.FontSize = 25;
                         negative.Load();
                         negative.Play();
                     }
@@ -227,6 +337,7 @@ namespace Memory_Game
             card2Flip = false;
             card1.Source = new BitmapImage(new Uri("Files/cardBackground.png", UriKind.Relative)); //Set background image
             card2.Source = new BitmapImage(new Uri("Files/cardBackground.png", UriKind.Relative)); //Set background image
+            Mouse.OverrideCursor = Cursors.Arrow;
             aTimer.Stop();
         }
         
@@ -241,7 +352,7 @@ namespace Memory_Game
             {
                 scoreGrid.ColumnDefinitions.Add(new ColumnDefinition());
             }
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 6; i++)
             {
                 scoreGrid.RowDefinitions.Add(new RowDefinition());
             }
@@ -271,21 +382,43 @@ namespace Memory_Game
             scorePlayer1 = new Label();
             scorePlayer1.Content = "Player1: " + currentScorePlayer1;
             scorePlayer1.Foreground = Brushes.Green;
-            scorePlayer1.FontSize = 20;
+            scorePlayer1.FontSize = 25;
             scorePlayer1.HorizontalAlignment = HorizontalAlignment.Left;
             Grid.SetColumn(scorePlayer1, 1);
             Grid.SetRow(scorePlayer1, 2);
             scoreGrid.Children.Add(scorePlayer1);
             
-
             scorePlayer2 = new Label();
             scorePlayer2.Content = "Player2: " + currentScorePlayer2;
-            scorePlayer2.FontSize = 20;
             scorePlayer2.Foreground = Brushes.Black;
+            scorePlayer2.FontSize = 20;
             scorePlayer2.HorizontalAlignment = HorizontalAlignment.Left;
             Grid.SetColumn(scorePlayer2, 1);
             Grid.SetRow(scorePlayer2, 3);
             scoreGrid.Children.Add(scorePlayer2);
+            
+            if (namePlayer3 != null)
+            {
+                scorePlayer3 = new Label();
+                scorePlayer3.Content = "Player3: " + currentScorePlayer3;
+                scorePlayer3.Foreground = Brushes.Black;
+                scorePlayer3.FontSize = 20;
+                scorePlayer3.HorizontalAlignment = HorizontalAlignment.Left;
+                Grid.SetColumn(scorePlayer3, 1);
+                Grid.SetRow(scorePlayer3, 4);
+                scoreGrid.Children.Add(scorePlayer3);
+            }
+            if (namePlayer4 != null)
+            {
+                scorePlayer4 = new Label();
+                scorePlayer4.Content = "Player4: " + currentScorePlayer4;
+                scorePlayer4.Foreground = Brushes.Black;
+                scorePlayer4.FontSize = 20;
+                scorePlayer4.HorizontalAlignment = HorizontalAlignment.Left;
+                Grid.SetColumn(scorePlayer4, 1);
+                Grid.SetRow(scorePlayer4, 5);
+                scoreGrid.Children.Add(scorePlayer4);
+            }
         }
 
         private void Sounds()
