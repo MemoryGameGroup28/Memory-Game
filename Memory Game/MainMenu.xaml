@@ -5,34 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Memory_Game"
         mc:Ignorable="d"
-        Title="Main Menu" Height="450" Width="800">
+        Title="Main Menu" Height="768" Width="1024
+        ">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Menu">
                 <MenuItem Header="_Highscores" Click="Highscores_Click" />
                 <MenuItem Header="_Restart" Click="Restart_Game_Click" />
                 <MenuItem Header="_Exit" Click="Exit_Game_Click" />
-               
+
 
             </MenuItem>
         </Menu>
-       
+
         <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="Files/MainMenu.png"/>
+            </Grid.Background>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="212*"/>
+                <RowDefinition Height="339*"/>
+                <RowDefinition Height="168*"/>
 
             </Grid.RowDefinitions>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-
-
-            </Grid.ColumnDefinitions>
-            <Button Grid.Row="0" Content="Start Game" HorizontalContentAlignment="Left" Background="Azure" Click="Start_Game_Click"/>
-            <Button Grid.Row="1" Content="Highscores" HorizontalContentAlignment="Left" Background="Aquamarine" Click="Highscores_Click"/>
-            <Button Grid.Row="2" Content="Exit Game" HorizontalContentAlignment="Left"  Background="Salmon" Click="Exit_Game_Click"/>
+            <Button Content="" HorizontalContentAlignment="Left" Click="Start_Game_Click" Margin="26,10,0,0" FontFamily="Franklin Gothic Medium Cond" FontSize="36" Width="366" BorderBrush="{x:Null}" Height="78" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1">
+                <Button.Background>
+                    <ImageBrush ImageSource="Files/ButtonStart.png"/>
+                </Button.Background>
+            </Button>
+            <Button Content="" HorizontalContentAlignment="Left" Click="Highscores_Click" Margin="26,93,0,0" FontFamily="Franklin Gothic Medium Cond" FontSize="36" HorizontalAlignment="Left" Width="366" BorderBrush="{x:Null}" Height="78" VerticalAlignment="Top" Grid.Row="1">
+                <Button.Background>
+                    <ImageBrush ImageSource="Files/ButtonHighScores.png"/>
+                </Button.Background>
+            </Button>
+            <Button Content="" HorizontalContentAlignment="Left" Click="Exit_Game_Click" Margin="26,176,0,0" RenderTransformOrigin="0.5,0.5" FontFamily="Franklin Gothic Medium Cond" FontSize="36" HorizontalAlignment="Left" Width="366" BorderBrush="{x:Null}" Height="78" Grid.Row="1" VerticalAlignment="Top">
+                <Button.Background>
+                    <ImageBrush ImageSource="Files/ButtonExit.png"/>
+                </Button.Background>
+            </Button>
         </Grid>
     </DockPanel>
 </Window>
