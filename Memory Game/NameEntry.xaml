@@ -5,38 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Memory_Game"
         mc:Ignorable="d"
-        Title="NameEntry" Height="450" Width="800">
+        Title="NameEntry" Height="768" Width="1024">
     <StackPanel>
+        <StackPanel.Background>
+            <ImageBrush ImageSource="Files/NameEntry.png" Stretch="UniformToFill"/>
+        </StackPanel.Background>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Highscores" Click="Highscores_Click" />
             <MenuItem Header="_Restart" Click="Restart_Game_Click" />
             <MenuItem Header="_Exit" Click="Exit_Game_Click" />
         </Menu>
-
+        
+        <Grid Height="84"/>
         <TextBlock Text="Player Name Entry" FontWeight="Bold" TextAlignment="Center" Margin="5" />
-        
         <TextBlock Text="Player 1" TextAlignment="Center" Margin="5"/>
-        
-        <TextBox Name="txtPlayer1" Padding="3" TextChanged="TextBox_TextChanged"/>
-
+        <TextBox x:Name="txtPlayer1" Padding="3" TextChanged="TextBox_TextChanged" Margin="258,0"/>
         <TextBlock Text="Player 2" TextAlignment="Center" Margin="5"/>
-        
-        <TextBox Name="txtPlayer2" Padding="3" TextChanged="TextBox_TextChanged_1"/>
-
+        <TextBox x:Name="txtPlayer2" Padding="3" TextChanged="TextBox_TextChanged_1" Margin="258,0"/>
         <TextBlock Text="Player 3" TextAlignment="Center" Margin="5"/>
-
-        <TextBox Name="txtPlayer3" Padding="3" TextChanged="TextBox_TextChanged_2"/>
-
+        <TextBox x:Name="txtPlayer3" Padding="3" TextChanged="TextBox_TextChanged_2" Margin="258,0"/>
         <TextBlock Text="Player 4" TextAlignment="Center" Margin="5"/>
+        <TextBox x:Name="txtPlayer4" Padding="3" TextChanged="TextBox_TextChanged_3" Margin="258,0"/>
+        <Button x:Name="btnStartGame" Margin="310,20,310,0" Content="Start Game" Click="Button_Click" Height="48"/>
 
-        <TextBox Name="txtPlayer4" Padding="3" TextChanged="TextBox_TextChanged_3"/>
-
-        <Button x:Name="btnStartGame" Margin="200 20 200 0" Content="Start Game" Click="Button_Click"></Button>
-        
-        <Grid>
-        
-    </Grid>
-     
 
     </StackPanel>
 </Window>

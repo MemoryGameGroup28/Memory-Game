@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 using System.Windows.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -191,16 +192,16 @@ namespace Memory_Game
                     }
                     else if (currentPlayer == 3)
                     {
-                        currentScorePlayer2++;
-                        scorePlayer3.Content = namePlayer3 + currentScorePlayer2;
+                        currentScorePlayer3++;
+                        scorePlayer3.Content = namePlayer3 + currentScorePlayer3;
                         scored.Load();
                         scored.Play();
                         currentMatches++;
                     }
                     else if (currentPlayer == 4)
                     {
-                        currentScorePlayer2++;
-                        scorePlayer3.Content = namePlayer4 + currentScorePlayer2;
+                        currentScorePlayer4++;
+                        scorePlayer3.Content = namePlayer4 + currentScorePlayer4;
                         scored.Load();
                         scored.Play();
                         currentMatches++;
@@ -212,13 +213,13 @@ namespace Memory_Game
                 
                 else if (card1Image != card2Image) //NO MATCH FUNCTION
                 {
-
-                    Mouse.OverrideCursor = Cursors.None;
+                    Mouse.OverrideCursor = Cursors.None; //hide cursor
                     //timer to return cards to original position after 1 second.
-                    aTimer = new DispatcherTimer();
+                    aTimer = new DispatcherTimer(); 
                     aTimer.Interval = TimeSpan.FromMilliseconds(1000);
                     aTimer.Tick += timer_Tick;
                     aTimer.Start();
+
                     if (currentPlayer == 1)
                     {
                         if (namePlayer2 != null)
@@ -229,7 +230,7 @@ namespace Memory_Game
                             scorePlayer1.FontSize = 20;
                             scorePlayer2.FontSize = 25;
                         }
-                        if (namePlayer2 == null)
+                        else if (namePlayer2 == null)
                         {
                             if (namePlayer3 != null)
                             {
