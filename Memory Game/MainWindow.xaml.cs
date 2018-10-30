@@ -52,11 +52,11 @@ namespace Memory_Game
         private void InitializeGameGrid()
         {
             ColumnDefinition gameColumn = new ColumnDefinition();
-            gameColumn.Width = new GridLength(7, GridUnitType.Star);
+            gameColumn.Width = new GridLength(7.5, GridUnitType.Star);
             GameGrid.ColumnDefinitions.Add(gameColumn);
             
             ColumnDefinition scoreColumn = new ColumnDefinition();
-            scoreColumn.Width = new GridLength(3, GridUnitType.Star);
+            scoreColumn.Width = new GridLength(2.5, GridUnitType.Star);
             GameGrid.ColumnDefinitions.Add(scoreColumn);
 
         }
