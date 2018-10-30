@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,9 +16,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Timers;
 using System.Media;
-
-
-
 
 namespace Memory_Game
 {
@@ -36,13 +34,12 @@ namespace Memory_Game
         private SoundPlayer negative = new SoundPlayer();
         private SoundPlayer scored = new SoundPlayer();
         private MediaPlayer themeMusic = new MediaPlayer();
-        //private SoundPlayer themeMusic = new SoundPlayer();
 
         //Label vairables
-        private Label scorePlayer1;
-        private Label scorePlayer2;
-        private Label scorePlayer3;
-        private Label scorePlayer4;
+        private Label scorePlayer1; //Stores the current score of Player 1
+        private Label scorePlayer2; //Stores the current score of Player 2
+        private Label scorePlayer3; //Stores the current score of Player 3
+        private Label scorePlayer4; //Stores the current score of Player 4
 
         //Score variables
         private int currentPlayer = 0; //Checks which player's turn it is
@@ -58,13 +55,17 @@ namespace Memory_Game
 
         //Card variables
         private DispatcherTimer aTimer = new DispatcherTimer(); //Time indicating when cards need to flip back if there is no match
+
         private bool card1Flip = false; //Checks if the user has clicked on a 1st card
         private bool card2Flip = false; //Checks if the user has clicked on a 2nd card
+
         private Uri card1Image = null; //Stores the URI (image location) of card 1
         private Uri card2Image = null; //Stores the URI (image location) of card 2
+
         private Image card1 = null; //stores which card has been clicked first (location on the board / location in the list)
         private Image card2 = null; //stores which card has been clicked second (location on the board / location in the list)
-        private int currentMatches = 0;
+
+        private int currentMatches = 0; //keeps track of the amount of matches to show end game window
 
 
         public MemoryGrid(Grid grid, int GridCol, int GridRow)
@@ -83,8 +84,8 @@ namespace Memory_Game
         private void InitializeMemoryGrid(int GridCol, int GridRow)
         {
             mainGrid = new Grid();
-            mainGrid.ShowGridLines = true;
             //mainGrid.ShowGridLines = true;
+            
             for (int i = 0; i < GridCol; i++)
             {
                 mainGrid.ColumnDefinitions.Add(new ColumnDefinition());
@@ -95,6 +96,7 @@ namespace Memory_Game
                 mainGrid.RowDefinitions.Add(new RowDefinition());
             }
             Grid.SetColumn(mainGrid, 0);
+            mainGrid.Background = new SolidColorBrush(Color.FromRgb(30, 30, 30));
             grid.Children.Add(mainGrid);
         }
 
@@ -126,12 +128,9 @@ namespace Memory_Game
             for (int i = 0; i < 16; i++)
             {
                 int imageNr = i % 8 + 1;
-                Uri source = new Uri("Files/Card" + imageNr + ".png", UriKind.Relative);
+                Uri source = new Uri("Files/Card" + imageNr + ".png", UriKind.Relative); //Define search parameters
                 images.Add(source);
-
             }
-            //IMAGE RANDOMZER COMES HERE
-
             List<Uri> randomList = new List<Uri>();
 
             Random r = new Random();
@@ -142,10 +141,7 @@ namespace Memory_Game
                 randomList.Add(images[randomIndex]); //add it to the new, random list
                 images.RemoveAt(randomIndex); //remove to avoid duplicates
             }
-
             return randomList; //return the new random list
-
-            //------------------------------//
             
         }
 
@@ -229,8 +225,8 @@ namespace Memory_Game
                         if (namePlayer2 != null)
                         {
                             currentPlayer = 2;
-                            scorePlayer1.Foreground = Brushes.Black;
-                            scorePlayer2.Foreground = Brushes.Green;
+                            scorePlayer1.Foreground = new SolidColorBrush(Color.FromRgb(178, 178, 178));
+                            scorePlayer2.Foreground = new SolidColorBrush(Color.FromRgb(60, 92, 29));
                             scorePlayer1.FontSize = 20;
                             scorePlayer2.FontSize = 25;
                         }
@@ -239,8 +235,8 @@ namespace Memory_Game
                             if (namePlayer3 != null)
                             {
                                 currentPlayer = 3;
-                                scorePlayer1.Foreground = Brushes.Black;
-                                scorePlayer3.Foreground = Brushes.Green;
+                                scorePlayer1.Foreground = new SolidColorBrush(Color.FromRgb(178, 178, 178));
+                                scorePlayer3.Foreground = new SolidColorBrush(Color.FromRgb(60, 92, 29));
                                 scorePlayer1.FontSize = 20;
                                 scorePlayer3.FontSize = 25;
                             }
@@ -249,15 +245,15 @@ namespace Memory_Game
                                 if (namePlayer4 != null)
                                 {
                                     currentPlayer = 4;
-                                    scorePlayer1.Foreground = Brushes.Black;
-                                    scorePlayer4.Foreground = Brushes.Green;
+                                    scorePlayer1.Foreground = new SolidColorBrush(Color.FromRgb(178, 178, 178));
+                                    scorePlayer4.Foreground = new SolidColorBrush(Color.FromRgb(60, 92, 29));
                                     scorePlayer1.FontSize = 20;
                                     scorePlayer4.FontSize = 25;
                                 }
                                 else if (namePlayer4 == null)
                                 {
                                     currentPlayer = 1;
-                                    scorePlayer1.Foreground = Brushes.Green;
+                                    scorePlayer1.Foreground = new SolidColorBrush(Color.FromRgb(60, 92, 29));
                                     scorePlayer1.FontSize = 25;
                                 }
                             }
@@ -271,8 +267,8 @@ namespace Memory_Game
                         if (namePlayer3 != null)
                         {
                             currentPlayer = 3;
-                            scorePlayer2.Foreground = Brushes.Black;
-                            scorePlayer3.Foreground = Brushes.Green;
+                            scorePlayer2.Foreground = new SolidColorBrush(Color.FromRgb(178, 178, 178));
+                            scorePlayer3.Foreground = new SolidColorBrush(Color.FromRgb(60, 92, 29));
                             scorePlayer2.FontSize = 20;
                             scorePlayer3.FontSize = 25;
                         }
@@ -281,16 +277,16 @@ namespace Memory_Game
                             if (namePlayer4 != null)
                             {
                                 currentPlayer = 4;
-                                scorePlayer2.Foreground = Brushes.Black;
-                                scorePlayer4.Foreground = Brushes.Green;
+                                scorePlayer2.Foreground = new SolidColorBrush(Color.FromRgb(178, 178, 178));
+                                scorePlayer4.Foreground = new SolidColorBrush(Color.FromRgb(60, 92, 29));
                                 scorePlayer2.FontSize = 20;
                                 scorePlayer4.FontSize = 25;
                             }
                             else if (namePlayer4 == null)
                             {
                                 currentPlayer = 1;
-                                scorePlayer2.Foreground = Brushes.Black;
-                                scorePlayer1.Foreground = Brushes.Green;
+                                scorePlayer2.Foreground = new SolidColorBrush(Color.FromRgb(178, 178, 178));
+                                scorePlayer1.Foreground = new SolidColorBrush(Color.FromRgb(60, 92, 29));
                                 scorePlayer2.FontSize = 20;
                                 scorePlayer1.FontSize = 25;
                             }
@@ -304,16 +300,16 @@ namespace Memory_Game
                         if (namePlayer4 != null)
                         {
                             currentPlayer = 4;
-                            scorePlayer3.Foreground = Brushes.Black;
-                            scorePlayer4.Foreground = Brushes.Green;
+                            scorePlayer3.Foreground = new SolidColorBrush(Color.FromRgb(178, 178, 178));
+                            scorePlayer4.Foreground = new SolidColorBrush(Color.FromRgb(60, 92, 29));
                             scorePlayer3.FontSize = 20;
                             scorePlayer4.FontSize = 25;
                         }
                         else if (namePlayer4 == null)
                         {
                             currentPlayer = 1;
-                            scorePlayer3.Foreground = Brushes.Black;
-                            scorePlayer1.Foreground = Brushes.Green;
+                            scorePlayer3.Foreground = new SolidColorBrush(Color.FromRgb(178, 178, 178));
+                            scorePlayer1.Foreground = new SolidColorBrush(Color.FromRgb(60, 92, 29));
                             scorePlayer3.FontSize = 20;
                             scorePlayer1.FontSize = 25;
                         }
@@ -324,8 +320,8 @@ namespace Memory_Game
                     else if (currentPlayer == 4)
                     {
                         currentPlayer = 1;
-                        scorePlayer4.Foreground = Brushes.Black;
-                        scorePlayer1.Foreground = Brushes.Green;
+                        scorePlayer4.Foreground = new SolidColorBrush(Color.FromRgb(178, 178, 178));
+                        scorePlayer1.Foreground = new SolidColorBrush(Color.FromRgb(60, 92, 29));
                         scorePlayer4.FontSize = 20;
                         scorePlayer1.FontSize = 25;
                         negative.Load();
@@ -337,6 +333,7 @@ namespace Memory_Game
             }
 
         }
+
         //After timer reaches 0, perform below action.
         private void timer_Tick(object sender, EventArgs e)
         {
@@ -349,13 +346,11 @@ namespace Memory_Game
             aTimer.Stop();
         }
         
-
         //Generate new Grid that holds all the score labels
         private void InitializeScoreGrid()
         {
             scoreGrid = new Grid();
-            
-            scoreGrid.ShowGridLines = true;
+            //scoreGrid.ShowGridLines = true;
             for (int i = 0; i < 1; i++)
             {
                 scoreGrid.ColumnDefinitions.Add(new ColumnDefinition());
@@ -365,6 +360,7 @@ namespace Memory_Game
                 scoreGrid.RowDefinitions.Add(new RowDefinition());
             }
             Grid.SetColumn(scoreGrid, 1);
+            scoreGrid.Background = new SolidColorBrush(Color.FromRgb(30, 30, 30));
             grid.Children.Add(scoreGrid);
         }
         
@@ -396,8 +392,8 @@ namespace Memory_Game
             scoreGrid.Children.Add(currentScore);
 
             scorePlayer1 = new Label();
-            scorePlayer1.Content = namePlayer1 + ":" + currentScorePlayer1;
-            scorePlayer1.Foreground = Brushes.Green;
+            scorePlayer1.Content = namePlayer1 + ":            " + currentScorePlayer1;
+            scorePlayer1.Foreground = new SolidColorBrush(Color.FromRgb(60, 92, 29));
             scorePlayer1.FontSize = 25;
             scorePlayer1.HorizontalAlignment = HorizontalAlignment.Left;
             Grid.SetColumn(scorePlayer1, 1);
@@ -406,20 +402,19 @@ namespace Memory_Game
             
             
             scorePlayer2 = new Label();
-            scorePlayer2.Content = namePlayer2 + ":" + currentScorePlayer2;
+            scorePlayer2.Content = namePlayer2 + ":            " + currentScorePlayer2;
             scorePlayer2.FontSize = 20;
-            scorePlayer2.Foreground = Brushes.Black;
+            scorePlayer2.Foreground = new SolidColorBrush(Color.FromRgb(178, 178, 178));
             scorePlayer2.HorizontalAlignment = HorizontalAlignment.Left;
             Grid.SetColumn(scorePlayer2, 1);
             Grid.SetRow(scorePlayer2, 3);
             scoreGrid.Children.Add(scorePlayer2);
-            
 
             if (namePlayer3 != null)
             {
                 scorePlayer3 = new Label();
-                scorePlayer3.Content = namePlayer3  + currentScorePlayer3;
-                scorePlayer3.Foreground = Brushes.Black;
+                scorePlayer3.Content = namePlayer3  + ":            " + currentScorePlayer3;
+                scorePlayer3.Foreground = new SolidColorBrush(Color.FromRgb(178, 178, 178));
                 scorePlayer3.FontSize = 20;
                 scorePlayer3.HorizontalAlignment = HorizontalAlignment.Left;
                 Grid.SetColumn(scorePlayer3, 1);
@@ -429,8 +424,8 @@ namespace Memory_Game
             if (namePlayer4 != null)
             {
                 scorePlayer4 = new Label();
-                scorePlayer4.Content = namePlayer4 + currentScorePlayer4;
-                scorePlayer4.Foreground = Brushes.Black;
+                scorePlayer4.Content = namePlayer4 + ":            " + currentScorePlayer4;
+                scorePlayer4.Foreground = new SolidColorBrush(Color.FromRgb(178, 178, 178));
                 scorePlayer4.FontSize = 20;
                 scorePlayer4.HorizontalAlignment = HorizontalAlignment.Left;
                 Grid.SetColumn(scorePlayer4, 1);
