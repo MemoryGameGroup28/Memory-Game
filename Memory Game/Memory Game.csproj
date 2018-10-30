@@ -132,6 +132,10 @@
     <Resource Include="Files\cardBackground.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Files\MainMenu.png" />
+    <Resource Include="Files\ButtonExit.png" />
+    <Resource Include="Files\ButtonHighScores.png" />
+    <Resource Include="Files\ButtonStart.png" />
     <Content Include="Files\Negative.wav" />
     <None Include="Files\Scored.wav" />
   </ItemGroup>
