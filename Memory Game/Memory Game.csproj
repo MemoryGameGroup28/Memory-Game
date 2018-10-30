@@ -132,6 +132,9 @@
     <Resource Include="Files\cardBackground.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Files\ScoreLabel3.png" />
+    <Resource Include="Files\ScoreLabel2.png" />
+    <Resource Include="Files\ScoreLabel.png" />
     <Resource Include="Files\MainMenu.png" />
     <Resource Include="Files\ButtonExit.png" />
     <Resource Include="Files\ButtonHighScores.png" />
