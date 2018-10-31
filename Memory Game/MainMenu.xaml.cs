@@ -15,9 +15,9 @@ using System.Windows.Shapes;
 
 namespace Memory_Game
 {
-    /// <summary>
-    /// Interaction logic for Window1.xaml
-    /// </summary>
+    // <summary>
+    // Interaction logic for Window1.xaml
+    // </summary>
     public partial class Window1 : Window
     {
         public Window1()

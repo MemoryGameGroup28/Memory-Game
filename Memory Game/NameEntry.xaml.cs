@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -13,13 +14,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
+
+
 namespace Memory_Game
 {
     /// <summary>
     /// Interaction logic for NameEntry.xaml
     /// </summary>
     public partial class NameEntry : Window
-    {      
+    {
+        private string Player1Name = null;
+        private string Player2Name = null;
+        private string Player3Name = null;
+        private string Player4Name = null;
+
         public NameEntry()
         {
             InitializeComponent();
@@ -51,25 +60,25 @@ namespace Memory_Game
         // player 1 name
         public void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string Player1Name = txtPlayer1.Text;
+            Player1Name = txtPlayer1.Text;
         }
 
         // player 2 name
         public void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
         {
-            string Player2Name = txtPlayer2.Text;
+            Player2Name = txtPlayer2.Text;
         }
 
         // player 3 name
         public void TextBox_TextChanged_2(object sender, TextChangedEventArgs e)
         {
-            string Player3Name = txtPlayer3.Text;
+            Player3Name = txtPlayer3.Text;
         }
 
         // player 4 name
         public void TextBox_TextChanged_3(object sender, TextChangedEventArgs e)
         {
-            string Player4Name = txtPlayer4.Text;
+            Player4Name = txtPlayer4.Text;
         }
 
 
@@ -82,6 +91,9 @@ namespace Memory_Game
             Memory_Game.Properties.Settings.Default.Player3Name = txtPlayer3.Text;
             Memory_Game.Properties.Settings.Default.Player4Name = txtPlayer4.Text;
             Memory_Game.Properties.Settings.Default.Save();
+            Directory.CreateDirectory(@"C:\MemoryGame");
+            File.WriteAllText(@"C:\MemoryGame\Names.SAV", string.Format("{0}\n{1}\n{2}\n{3}\n{4}", Player1Name, Player2Name, Player3Name, Player4Name, "WhiteLine"));
+
 
             new MainWindow().Show();
                 this.Close();          
