@@ -61,6 +61,10 @@ namespace Memory_Game
 
         }
         // menu controls
+        private void Instructions_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://www.eduplace.com/ss/act/rules.html");
+        }
         private void Exit_Game_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
