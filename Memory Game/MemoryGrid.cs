@@ -458,6 +458,7 @@ namespace Memory_Game
                 MessageBox.Show("Congratulatuons you've found all the matches");
                 if (Directory.Exists(@"C:\MemoryGame"))
                 {
+                    File.Delete(@"C:\MemoryGame\Names.SAV");
                     Directory.Delete(@"C:\MemoryGame");
                 }
             }
@@ -614,6 +615,7 @@ namespace Memory_Game
                             MessageBox.Show("No names have been entered, the game will restart.");
                             if (Directory.Exists(@"C:\MemoryGame"))
                             {
+                                File.Delete(@"C:\MemoryGame\Names.SAV");
                                 Directory.Delete(@"C:\MemoryGame");
                             }
                             Process.Start(Application.ResourceAssembly.Location);
