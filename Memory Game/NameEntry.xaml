@@ -11,6 +11,7 @@
             <ImageBrush ImageSource="Files/NameEntry.png" Stretch="UniformToFill"/>
         </StackPanel.Background>
         <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Instructions" Click="Instructions_Click" />
             <MenuItem Header="_Highscores" Click="Highscores_Click" />
             <MenuItem Header="_Restart" Click="Restart_Game_Click" />
             <MenuItem Header="_Exit" Click="Exit_Game_Click" />
