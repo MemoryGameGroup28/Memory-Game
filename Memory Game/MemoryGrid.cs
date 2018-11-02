@@ -49,14 +49,21 @@ namespace Memory_Game
         private int currentScorePlayer3 = 0; //Keeps track of the score of player 3
         private int currentScorePlayer4 = 0; //Keeps track of the score of player 4
 
+        //Save file variables
+        StreamReader sr = new StreamReader(@"C:\MemoryGame\Names.SAV");
+        StreamReader saveData;
+        List<string> lines = new List<string>();
+        List<string> savedata = new List<string>();
+
+        List<string> playingCards = new List<string>();
+
         private string namePlayer1 = null;
         private string namePlayer2 = null;
         private string namePlayer3 = null;
         private string namePlayer4 = null;
-        StreamReader sr = new StreamReader(@"C:\MemoryGame\Names.SAV");
-        List<string> lines = new List<string>();
 
         //Card variables
+        List<Uri> images = new List<Uri>();
         private DispatcherTimer aTimer = new DispatcherTimer(); //Time indicating when cards need to flip back if there is no match
 
         private bool card1Flip = false; //Checks if the user has clicked on a 1st card
@@ -73,7 +80,7 @@ namespace Memory_Game
         private string xyCard2 = null; //stores Row&Column definition of card2
 
         private int currentMatches = 0; //keeps track of the amount of matches to show end game window
-
+        
 
         public MemoryGrid(Grid grid, int GridCol, int GridRow)
         {
@@ -111,7 +118,8 @@ namespace Memory_Game
         //Add backgroundimages to the generated grid
         private void AddBackgroundImages()
         {
-            List<Uri> images = GetImagesList();
+            images = GetImagesList();
+
             for (int GridRow = 0; GridRow < ImageRows; GridRow++)
             {
                 for (int GridCol = 0; GridCol < ImageCols; GridCol++)
@@ -139,7 +147,6 @@ namespace Memory_Game
                 images.Add(source);
             }
             List<Uri> randomList = new List<Uri>();
-
             Random r = new Random();
             int randomIndex = 0;
             while (images.Count > 0)
@@ -149,12 +156,91 @@ namespace Memory_Game
                 images.RemoveAt(randomIndex); //remove to avoid duplicates
             }
             return randomList; //return the new random list
-            
         }
-        
 
-        //On click event when user clicks on a card
-        private void CardClick(object sender, MouseButtonEventArgs e)
+        //public List<string> SaveCardList()
+        //{
+        //    foreach (Uri card in GetImagesList())
+        //    {
+        //        Convert.ToString(card);
+        //        playingCards.Add(Convert.ToString(card));
+        //    }
+        //    return playingCards;
+        //}
+        
+        public void reloadGame()
+        {
+            if (File.Exists(@"C:\MemoryGame\ReloadGame.SAV"))
+            {
+                saveData = new StreamReader(@"C:\MemoryGame\Memory.SAV");
+                while (!saveData.EndOfStream) //Adds all the lines from the .SAV file if the file has not ended
+                {
+                    savedata.Add(saveData.ReadLine());
+                }
+                if (!string.IsNullOrEmpty(savedata[0])) //Only adds the name if the line is not empty
+                {
+                    namePlayer1 = savedata[0];
+                }
+                if (!string.IsNullOrEmpty(savedata[1])) //Only adds the name if the line is not empty
+                {
+                    currentScorePlayer1 = Convert.ToInt32(savedata[1]);
+                    
+                }
+                if (!string.IsNullOrEmpty(savedata[2])) //Only adds the name if the line is not empty
+                {
+                    namePlayer2 = savedata[2];
+                }
+                if (!string.IsNullOrEmpty(savedata[3])) //Only adds the name if the line is not empty
+                {
+                    currentScorePlayer2 = Convert.ToInt32(savedata[3]);
+
+                }
+                if (!string.IsNullOrEmpty(savedata[4])) //Only adds the name if the line is not empty
+                {
+                    namePlayer3 = savedata[4];
+                }
+                if (!string.IsNullOrEmpty(savedata[5])) //Only adds the name if the line is not empty
+                {
+                    currentScorePlayer3 = Convert.ToInt32(savedata[5]);
+                }
+                if (!string.IsNullOrEmpty(savedata[6])) //Only adds the name if the line is not empty
+                {
+                    namePlayer4 = savedata[6];
+                }
+                if (!string.IsNullOrEmpty(savedata[7])) //Only adds the name if the line is not empty
+                {
+                    currentScorePlayer4 = Convert.ToInt32(savedata[7]);
+                }
+                if (!string.IsNullOrEmpty(savedata[8])) //Only adds the name if the line is not empty
+                {
+                    currentPlayer = Convert.ToInt32(savedata[8]);
+                }
+                File.Delete(@"C:\MemoryGame\ReloadGame.SAV");
+            }
+        }
+
+
+        public void SaveGameData(object sender, MouseButtonEventArgs e)
+        {
+            if (File.Exists(@"C:\MemoryGame\Memory.SAV"))
+            {
+                File.Delete(@"C:\MemoryGame\Memory.SAV");
+            }
+
+            if (!File.Exists(@"C:\MemoryGame\Memory.SAV"))
+            {
+                File.WriteAllText(@"C:\MemoryGame\Memory.SAV", string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n{7}\n{8}", namePlayer1, currentScorePlayer1, namePlayer2, currentScorePlayer2, namePlayer3, currentScorePlayer3, namePlayer4, currentScorePlayer4, currentPlayer));
+            }
+            
+            //SaveCardList();
+            //foreach (string card in playingCards)
+            //{
+            //    File.WriteAllLines(@"C:\MemoryGame\Cards.SAV", playingCards);
+            //}
+        }
+
+    //On click event when user clicks on a card
+    private void CardClick(object sender, MouseButtonEventArgs e)
         {
             var element = (UIElement)e.Source;
             //On click access image URI from List<URI>, convert URI to Bitmap Image and store data from card 1 in card1Image
@@ -229,10 +315,17 @@ namespace Memory_Game
                         scored.Play();
                         currentMatches++;
                     }
-
+                    card1Image = null;
+                    card2Image = null;
+                    card1.Source = null;
+                    card2.Source = null;
+                    card1 = null;
+                    card2 = null;
                     card1Flip = false;
                     card2Flip = false;
                     matches();
+                    
+                    //SaveCardList();
                 }
                 else if (card1Image.Equals(card2Image) && xyCard1 == xyCard2)
                 {
@@ -424,10 +517,9 @@ namespace Memory_Game
             card2Flip = false;
             card1.Source = new BitmapImage(new Uri("Files/cardBackground.png", UriKind.Relative)); //Set background image
             card2.Source = new BitmapImage(new Uri("Files/cardBackground.png", UriKind.Relative)); //Set background image
-            Mouse.OverrideCursor = Cursors.Arrow;
             aTimer.Stop();
         }
-        
+
         //Generate new Grid that holds all the score labels
         private void InitializeScoreGrid()
         {
@@ -487,14 +579,54 @@ namespace Memory_Game
             if (currentMatches == 8)
             {
                 MessageBox.Show("Congratulatuons you've found all the matches");
+                HighscoreSave();
                 if (Directory.Exists(@"C:\MemoryGame"))
                 {
                     File.Delete(@"C:\MemoryGame\Names.SAV");
-                    Directory.Delete(@"C:\MemoryGame");
+                    
                 }
             }
         }
-        
+        // current date string for SAV file
+        string CurrentDate = DateTime.Now.ToString("dd-MM-yyyy");
+
+        private void HighscoreSave()
+        {
+            if (currentMatches == 8)
+            {
+                // sorts files in highscore folder by last write time and deletes the oldest file.
+                foreach (var fi in new DirectoryInfo(@"C:\MemoryGame\Highscores").GetFiles().OrderByDescending(x => x.LastWriteTime).Skip(3))
+                fi.Delete();
+            }
+            if (currentMatches == 8)
+            {
+                if (!File.Exists(@"C:\MemoryGame\Highscores\Highscore1.SAV"))
+                {
+                    File.WriteAllText(@"C:\MemoryGame\Highscores\Highscore1.SAV", string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n{7}\n{8}",
+                           CurrentDate, namePlayer1, currentScorePlayer1, namePlayer2, currentScorePlayer2,
+                           namePlayer3, currentScorePlayer3, namePlayer4, currentScorePlayer4));
+                }
+                else if (!File.Exists(@"C:\MemoryGame\Highscores\Highscore2.SAV"))
+                {
+                    File.WriteAllText(@"C:\MemoryGame\Highscores\Highscore2.SAV", string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n{7}\n{8}",
+                        CurrentDate, namePlayer1, currentScorePlayer1, namePlayer2, currentScorePlayer2,
+                        namePlayer3, currentScorePlayer3, namePlayer4, currentScorePlayer4));
+                }
+                else if (!File.Exists(@"C:\MemoryGame\Highscores\Highscore3.SAV"))
+                {
+                    File.WriteAllText(@"C:\MemoryGame\Highscores\Highscore3.SAV", string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n{7}\n{8}",
+                        CurrentDate, namePlayer1, currentScorePlayer1, namePlayer2, currentScorePlayer2,
+                        namePlayer3, currentScorePlayer3, namePlayer4, currentScorePlayer4));
+                }
+                else if (!File.Exists(@"C:\MemoryGame\Highscores\Highscore4.SAV"))
+                {
+                    File.WriteAllText(@"C:\MemoryGame\Highscores\Highscore4.SAV", string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n{7}\n{8}",
+                        CurrentDate, namePlayer1, currentScorePlayer1, namePlayer2, currentScorePlayer2,
+                        namePlayer3, currentScorePlayer3, namePlayer4, currentScorePlayer4));
+                }
+            }
+        }
+
         //Loads the names from the save file created during the name entry. 
         private void LoadNames()
         {
@@ -533,15 +665,16 @@ namespace Memory_Game
             Grid.SetRow(title, 0);
             scoreGrid.Children.Add(title);
 
-            Label currentScore = new Label();
-            currentScore.Content = "\nScores";
-            currentScore.FontSize = 20;
-            currentScore.HorizontalAlignment = HorizontalAlignment.Left;
-            Grid.SetColumn(currentScore, 1);
-            Grid.SetRow(currentScore, 1);
-            scoreGrid.Children.Add(currentScore);
+            Label SaveGame = new Label();
+            SaveGame.Content = "\nSave Game";
+            SaveGame.FontSize = 20;
+            SaveGame.HorizontalAlignment = HorizontalAlignment.Left;
+            Grid.SetColumn(SaveGame, 1);
+            Grid.SetRow(SaveGame, 1);
+            scoreGrid.Children.Add(SaveGame);
+            SaveGame.MouseDown += new MouseButtonEventHandler(SaveGameData);
 
-            if(namePlayer1 != null)
+            if (namePlayer1 != null)
             {
                 scorePlayer1 = new Label();
                 scorePlayer1.Content = "\n" + namePlayer1 + " :            " + currentScorePlayer1;
