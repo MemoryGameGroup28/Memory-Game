@@ -10,7 +10,7 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Menu">
-                <MenuItem Header="_Highscores" Click="Highscores_Click" />
+                <MenuItem Header="_Main Menu" Click="Highscores_Click" />
                 <MenuItem Header="_Restart" Click="Restart_Game_Click" />
                 <MenuItem Header="_Exit" Click="Exit_Game_Click" />
 
@@ -18,6 +18,76 @@
             </MenuItem>
         </Menu>
         <Grid>
+            <Grid.ColumnDefinitions>
+
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+
+
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="*"/>
+
+            </Grid.RowDefinitions>
+
+
+            <Label Content="Game Date :" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Player1" Grid.Column="1" HorizontalAlignment="Left" Margin="10,41,0,0" Grid.Row="1" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Player2" Grid.Column="1" HorizontalAlignment="Left" Margin="10,72,0,0" Grid.Row="1" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Player3" Grid.Column="1" HorizontalAlignment="Left" Margin="10,103,0,0" Grid.Row="1" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Player4" Grid.Column="1" HorizontalAlignment="Left" Margin="10,134,0,0" Grid.Row="1" VerticalAlignment="Top" Width="112"/>
+
+            <Label Content="Game Date :" Grid.Column="3" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Player1_2" Grid.Column="3" HorizontalAlignment="Left" Margin="10,41,0,0" Grid.Row="1" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Player2_2" Grid.Column="3" HorizontalAlignment="Left" Margin="10,72,0,0" Grid.Row="1" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Player3_2" Grid.Column="3" HorizontalAlignment="Left" Margin="10,103,0,0" Grid.Row="1" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Player4_2" Grid.Column="3" HorizontalAlignment="Left" Margin="10,134,0,0" Grid.Row="1" VerticalAlignment="Top" Width="112"/>
+
+            <Label Content="Game Date :" Grid.Column="1"  HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Player1_3" Grid.Column="1" HorizontalAlignment="Left" Margin="10,41,0,0" Grid.Row="2" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Player2_3" Grid.Column="1" HorizontalAlignment="Left" Margin="10,72,0,0" Grid.Row="2" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Player3_3" Grid.Column="1" HorizontalAlignment="Left" Margin="10,103,0,0" Grid.Row="2" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Player4_3" Grid.Column="1" HorizontalAlignment="Left" Margin="10,134,0,0" Grid.Row="2" VerticalAlignment="Top" Width="112"/>
+
+            <Label Content="Game Date :" Grid.Column="3" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Player1_4" Grid.Column="3" HorizontalAlignment="Left" Margin="10,41,0,0" Grid.Row="2" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Player2_4" Grid.Column="3" HorizontalAlignment="Left" Margin="10,72,0,0" Grid.Row="2" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Player3_4" Grid.Column="3" HorizontalAlignment="Left" Margin="10,103,0,0" Grid.Row="2" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Player4_4" Grid.Column="3" HorizontalAlignment="Left" Margin="10,134,0,0" Grid.Row="2" VerticalAlignment="Top" Width="112"/>
+
+            <TextBlock Name="Dateblock1"  Grid.Column="2" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Score1" Grid.Column="2" HorizontalAlignment="Left" Margin="10,41,0,0" Grid.Row="1" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Score2" Grid.Column="2" HorizontalAlignment="Left" Margin="10,72,0,0" Grid.Row="1" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Score3" Grid.Column="2" HorizontalAlignment="Left" Margin="10,103,0,0" Grid.Row="1" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Score4" Grid.Column="2" HorizontalAlignment="Left" Margin="10,134,0,0" Grid.Row="1" VerticalAlignment="Top" Width="112"/>
+
+            <TextBlock Name="Dateblock2" Grid.Column="4" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Score1_2" Grid.Column="4" HorizontalAlignment="Left" Margin="10,41,0,0" Grid.Row="1" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Score2_2" Grid.Column="4" HorizontalAlignment="Left" Margin="10,72,0,0" Grid.Row="1" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Score3_2" Grid.Column="4" HorizontalAlignment="Left" Margin="10,103,0,0" Grid.Row="1" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Score4_2" Grid.Column="4" HorizontalAlignment="Left" Margin="10,134,0,0" Grid.Row="1" VerticalAlignment="Top" Width="112"/>
+
+            <TextBlock Name="Dateblock4" Grid.Column="4"  HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Score1_3" Grid.Column="4" HorizontalAlignment="Left" Margin="10,41,0,0" Grid.Row="2" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Score2_3" Grid.Column="4" HorizontalAlignment="Left" Margin="10,72,0,0" Grid.Row="2" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Score3_3" Grid.Column="4" HorizontalAlignment="Left" Margin="10,103,0,0" Grid.Row="2" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Score4_3" Grid.Column="4" HorizontalAlignment="Left" Margin="10,134,0,0" Grid.Row="2" VerticalAlignment="Top" Width="112"/>
+
+            <TextBlock Name="Dateblock3" Grid.Column="2" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Score1_4" Grid.Column="2" HorizontalAlignment="Left" Margin="10,41,0,0" Grid.Row="2" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Score2_4" Grid.Column="2" HorizontalAlignment="Left" Margin="10,72,0,0" Grid.Row="2" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Score3_4" Grid.Column="2" HorizontalAlignment="Left" Margin="10,103,0,0" Grid.Row="2" VerticalAlignment="Top" Width="112"/>
+            <TextBlock Name="Score4_4" Grid.Column="2" HorizontalAlignment="Left" Margin="10,134,0,0" Grid.Row="2" VerticalAlignment="Top" Width="112"/>
+
+
 
         </Grid>
     </DockPanel>

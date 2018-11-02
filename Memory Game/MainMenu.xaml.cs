@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace Memory_Game
         public Window1()
         {
             InitializeComponent();
+            Directory.CreateDirectory(@"C:\MemoryGame\Highscores");
         }
 
         
@@ -50,6 +52,7 @@ namespace Memory_Game
 
         private void Highscores_Click(object sender, RoutedEventArgs e)
         {
+            
             new Highscores().Show();
             this.Close();
         }
