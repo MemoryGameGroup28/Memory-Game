@@ -51,12 +51,8 @@ namespace Memory_Game
 
         //Save file variables
         StreamReader sr = new StreamReader(@"C:\MemoryGame\Names.SAV");
-        StreamReader saveData;
         List<string> lines = new List<string>();
         List<string> savedata = new List<string>();
-
-        List<string> playingCards = new List<string>();
-
         private string namePlayer1 = null;
         private string namePlayer2 = null;
         private string namePlayer3 = null;
@@ -158,68 +154,6 @@ namespace Memory_Game
             return randomList; //return the new random list
         }
 
-        //public List<string> SaveCardList()
-        //{
-        //    foreach (Uri card in GetImagesList())
-        //    {
-        //        Convert.ToString(card);
-        //        playingCards.Add(Convert.ToString(card));
-        //    }
-        //    return playingCards;
-        //}
-        
-        public void reloadGame()
-        {
-            if (File.Exists(@"C:\MemoryGame\ReloadGame.SAV"))
-            {
-                saveData = new StreamReader(@"C:\MemoryGame\Memory.SAV");
-                while (!saveData.EndOfStream) //Adds all the lines from the .SAV file if the file has not ended
-                {
-                    savedata.Add(saveData.ReadLine());
-                }
-                if (!string.IsNullOrEmpty(savedata[0])) //Only adds the name if the line is not empty
-                {
-                    namePlayer1 = savedata[0];
-                }
-                if (!string.IsNullOrEmpty(savedata[1])) //Only adds the name if the line is not empty
-                {
-                    currentScorePlayer1 = Convert.ToInt32(savedata[1]);
-                    
-                }
-                if (!string.IsNullOrEmpty(savedata[2])) //Only adds the name if the line is not empty
-                {
-                    namePlayer2 = savedata[2];
-                }
-                if (!string.IsNullOrEmpty(savedata[3])) //Only adds the name if the line is not empty
-                {
-                    currentScorePlayer2 = Convert.ToInt32(savedata[3]);
-
-                }
-                if (!string.IsNullOrEmpty(savedata[4])) //Only adds the name if the line is not empty
-                {
-                    namePlayer3 = savedata[4];
-                }
-                if (!string.IsNullOrEmpty(savedata[5])) //Only adds the name if the line is not empty
-                {
-                    currentScorePlayer3 = Convert.ToInt32(savedata[5]);
-                }
-                if (!string.IsNullOrEmpty(savedata[6])) //Only adds the name if the line is not empty
-                {
-                    namePlayer4 = savedata[6];
-                }
-                if (!string.IsNullOrEmpty(savedata[7])) //Only adds the name if the line is not empty
-                {
-                    currentScorePlayer4 = Convert.ToInt32(savedata[7]);
-                }
-                if (!string.IsNullOrEmpty(savedata[8])) //Only adds the name if the line is not empty
-                {
-                    currentPlayer = Convert.ToInt32(savedata[8]);
-                }
-                File.Delete(@"C:\MemoryGame\ReloadGame.SAV");
-            }
-        }
-
-
         public void SaveGameData(object sender, MouseButtonEventArgs e)
         {
             if (File.Exists(@"C:\MemoryGame\Memory.SAV"))
@@ -231,16 +165,10 @@ namespace Memory_Game
             {
                 File.WriteAllText(@"C:\MemoryGame\Memory.SAV", string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n{7}\n{8}", namePlayer1, currentScorePlayer1, namePlayer2, currentScorePlayer2, namePlayer3, currentScorePlayer3, namePlayer4, currentScorePlayer4, currentPlayer));
             }
-            
-            //SaveCardList();
-            //foreach (string card in playingCards)
-            //{
-            //    File.WriteAllLines(@"C:\MemoryGame\Cards.SAV", playingCards);
-            //}
         }
 
-    //On click event when user clicks on a card
-    private void CardClick(object sender, MouseButtonEventArgs e)
+        //On click event when user clicks on a card
+        private void CardClick(object sender, MouseButtonEventArgs e)
         {
             var element = (UIElement)e.Source;
             //On click access image URI from List<URI>, convert URI to Bitmap Image and store data from card 1 in card1Image
@@ -286,7 +214,7 @@ namespace Memory_Game
                     if (currentPlayer == 1)
                     {
                         currentScorePlayer1++;
-                        scorePlayer1.Content = "\n" + namePlayer1 + " :            " + currentScorePlayer1;
+                        scorePlayer1.Content = "\n" + namePlayer1 + " :   " + currentScorePlayer1;
                         scored.Load();
                         scored.Play();
                         currentMatches++;
@@ -294,7 +222,7 @@ namespace Memory_Game
                     else if (currentPlayer == 2)
                     {
                         currentScorePlayer2++;
-                        scorePlayer2.Content = "\n" + namePlayer2 + " :            " + currentScorePlayer2;
+                        scorePlayer2.Content = "\n" + namePlayer2 + " :   " + currentScorePlayer2;
                         scored.Load();
                         scored.Play();
                         currentMatches++;
@@ -302,7 +230,7 @@ namespace Memory_Game
                     else if (currentPlayer == 3)
                     {
                         currentScorePlayer3++;
-                        scorePlayer3.Content = "\n" + namePlayer3 + " :            " + currentScorePlayer3;
+                        scorePlayer3.Content = "\n" + namePlayer3 + " :   " + currentScorePlayer3;
                         scored.Load();
                         scored.Play();
                         currentMatches++;
@@ -310,7 +238,7 @@ namespace Memory_Game
                     else if (currentPlayer == 4)
                     {
                         currentScorePlayer4++;
-                        scorePlayer4.Content = "\n" + namePlayer4 + " :            " + currentScorePlayer4;
+                        scorePlayer4.Content = "\n" + namePlayer4 + " :   " + currentScorePlayer4;
                         scored.Load();
                         scored.Play();
                         currentMatches++;
@@ -665,19 +593,18 @@ namespace Memory_Game
             Grid.SetRow(title, 0);
             scoreGrid.Children.Add(title);
 
-            Label SaveGame = new Label();
-            SaveGame.Content = "\nSave Game";
-            SaveGame.FontSize = 20;
-            SaveGame.HorizontalAlignment = HorizontalAlignment.Left;
-            Grid.SetColumn(SaveGame, 1);
-            Grid.SetRow(SaveGame, 1);
-            scoreGrid.Children.Add(SaveGame);
-            SaveGame.MouseDown += new MouseButtonEventHandler(SaveGameData);
+            Label Scores = new Label();
+            Scores.Content = "\nScores";
+            Scores.FontSize = 20;
+            Scores.HorizontalAlignment = HorizontalAlignment.Left;
+            Grid.SetColumn(Scores, 1);
+            Grid.SetRow(Scores, 1);
+            scoreGrid.Children.Add(Scores);
 
             if (namePlayer1 != null)
             {
                 scorePlayer1 = new Label();
-                scorePlayer1.Content = "\n" + namePlayer1 + " :            " + currentScorePlayer1;
+                scorePlayer1.Content = "\n" + namePlayer1 + " :   " + currentScorePlayer1;
                 scorePlayer1.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
                 scorePlayer1.FontSize = 25;
                 scorePlayer1.HorizontalAlignment = HorizontalAlignment.Left;
@@ -688,7 +615,7 @@ namespace Memory_Game
             if(namePlayer2 != null)
             {
                 scorePlayer2 = new Label();
-                scorePlayer2.Content = "\n" + namePlayer2 + " :            " + currentScorePlayer2;
+                scorePlayer2.Content = "\n" + namePlayer2 + " :   " + currentScorePlayer2;
                 scorePlayer2.FontSize = 20;
                 scorePlayer2.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
                 scorePlayer2.HorizontalAlignment = HorizontalAlignment.Left;
@@ -699,7 +626,7 @@ namespace Memory_Game
             if (namePlayer3 != null)
             {
                 scorePlayer3 = new Label();
-                scorePlayer3.Content = "\n" + namePlayer3  + " :            " + currentScorePlayer3;
+                scorePlayer3.Content = "\n" + namePlayer3 + " :   " + currentScorePlayer3;
                 scorePlayer3.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
                 scorePlayer3.FontSize = 20;
                 scorePlayer3.HorizontalAlignment = HorizontalAlignment.Left;
@@ -710,7 +637,7 @@ namespace Memory_Game
             if (namePlayer4 != null)
             {
                 scorePlayer4 = new Label();
-                scorePlayer4.Content = "\n" + namePlayer4 + " :            " + currentScorePlayer4;
+                scorePlayer4.Content = "\n" + namePlayer4 + " :   " + currentScorePlayer4;
                 scorePlayer4.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
                 scorePlayer4.FontSize = 20;
                 scorePlayer4.HorizontalAlignment = HorizontalAlignment.Left;
