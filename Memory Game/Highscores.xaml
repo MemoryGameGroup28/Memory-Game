@@ -5,19 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Memory_Game"
         mc:Ignorable="d"
-        Title="Highscores" Height="450" Width="800">
+        Title="Highscores" Height="768" Width="1024">
 
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_Menu">
-                <MenuItem Header="_Main Menu" Click="Highscores_Click" />
-                <MenuItem Header="_Restart" Click="Restart_Game_Click" />
-                <MenuItem Header="_Exit" Click="Exit_Game_Click" />
-
-
-            </MenuItem>
+            <MenuItem Header="_Main Menu" Click="Highscores_Click" />
+            <MenuItem Header="_Restart" Click="Restart_Game_Click" />
+            <MenuItem Header="_Exit" Click="Exit_Game_Click" />
         </Menu>
         <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="Files/HighScores.jpg" Stretch="UniformToFill"/>
+            </Grid.Background>
             <Grid.ColumnDefinitions>
 
                 <ColumnDefinition Width="*"/>

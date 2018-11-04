@@ -28,7 +28,6 @@
         <TextBlock Text="Player 4" TextAlignment="Center" Margin="5"/>
         <TextBox x:Name="txtPlayer4" Padding="3" TextChanged="TextBox_TextChanged_3" Margin="258,0"/>
         <Button x:Name="btnStartGame" Margin="310,20,310,0" Content="Start New Game" Click="Button_Click" Height="48"/>
-        <Button x:Name="btnLoadGame" Margin="310,20,310,0" Content="Resume Previous Game" Click="Load_Game_Click" Height="48"/>
 
 
     </StackPanel>

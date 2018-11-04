@@ -87,30 +87,12 @@ namespace Memory_Game
         // Start game click
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //Saving of player names to user settings
-            //Memory_Game.Properties.Settings.Default.Player1Name = txtPlayer1.Text;
-            //Memory_Game.Properties.Settings.Default.Player2Name = txtPlayer2.Text;
-            //Memory_Game.Properties.Settings.Default.Player3Name = txtPlayer3.Text;
-            //Memory_Game.Properties.Settings.Default.Player4Name = txtPlayer4.Text;
-            //Memory_Game.Properties.Settings.Default.Save();
+            //Saving of player names to external file
             Directory.CreateDirectory(@"C:\MemoryGame");
             File.WriteAllText(@"C:\MemoryGame\Names.SAV", string.Format("{0}\n{1}\n{2}\n{3}\n{4}", Player1Name, Player2Name, Player3Name, Player4Name, "WhiteLine"));
 
-
             new MainWindow().Show();
                 this.Close();          
-        }
-
-        //Load Game Click
-        private void Load_Game_Click(object sender, RoutedEventArgs e)
-        {
-            if (File.Exists(@"C:\MemoryGame\Memory.SAV"))
-            {
-                File.WriteAllText(@"C:\MemoryGame\ReloadGame.SAV", string.Format("{0}", "True"));
-                new MainWindow().Show();
-                this.Close();
-            }
-            
         }
     }
 
